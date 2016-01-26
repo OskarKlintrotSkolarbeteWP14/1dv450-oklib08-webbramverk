@@ -7,9 +7,9 @@
 > vagrant ssh
 ```
 
-If there is an issue with mounting the shared folders, try this in the guest:
+If there is an issue with mounting the shared folders, try updating the guests VBoxGuestAdditions:
 ``` Bash
-$ sudo ln -s /opt/VBoxGuestAdditions-5.0.14/lib/VBoxGuestAdditions /usr/lib/VBoxGuestAdditions
+$ sudo ln -s /opt/VBoxGuestAdditions-5.0.14/lib/VBoxGuestAdditions /usr/lib/VBoxGuestAdditions #5.0.14 should match the VBoxGuestAdditions on your host
 ```
 
 SSH into the guest (if prompted for password, it's `vagrant`) and install the dependencies:
