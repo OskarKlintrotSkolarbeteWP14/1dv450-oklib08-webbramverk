@@ -19,5 +19,5 @@ $ bundle install
 
 Start the server:
 ``` Bash
-$ rails server -b 0.0.0.0
+$ rails server -b 0.0.0.0 # Server runs at http://localhost:8080 
 ```
