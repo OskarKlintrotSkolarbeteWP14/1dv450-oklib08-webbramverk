@@ -13,3 +13,7 @@ rake db:migrate VERSION=0
 rake db:migrate
 rake db:seed
 exit
+bundle install
+rake db:migrate RAILS_ENV=development
+rake db:seed
+rails s -b 0.0.0.0
