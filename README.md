@@ -17,7 +17,13 @@ SSH into the guest (if prompted for password, it's `vagrant`) and install the de
 $ bundle install
 ```
 
+Set up the database:
+``` Bash
+$ rake db:migrate RAILS_ENV=development
+$ rake db:seed
+```
+
 Start the server:
 ``` Bash
-$ rails server -b 0.0.0.0 # Server runs at http://localhost:8080 
+$ rails server -b 0.0.0.0 # Server runs at http://localhost:8080
 ```
