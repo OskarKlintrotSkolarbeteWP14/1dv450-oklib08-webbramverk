@@ -32,7 +32,18 @@ class KeysController < ApplicationController
   end
 
   def destroy
-    flash[:success] = "Applikationen togs bort!"
+    @key = Key.find(destroy_params[:id])
+
+    if @key.user_id != current_user.id
+      flash[:danger] = "Du har inte rättigheter för att ta bort denna applikationen!"
+      redirect_to keys_path
+    end
+
+    if @key.destroy
+      flash[:success] = "Applikationen togs bort!"
+    else
+      flash[:danger] = "Ett fel uppstod, försök igen senare."
+    end
     redirect_to keys_path
   end
 
@@ -40,5 +51,9 @@ class KeysController < ApplicationController
 
   def link_params
     params.require(:key).permit(:application)
+  end
+
+  def destroy_params
+    params.permit(:id)
   end
 end

@@ -26,7 +26,7 @@
           <%= key.api_key %>
         </td>
         <td>
-          <%= link_to "Ta bort", key, method: :destroy %>
+          <%= link_to "Ta bort", key, method: :delete, class: "btn btn-xs btn-default", data: { confirm: "Är du säker på att du vill ta bort #{key.application}?" } %>
         </td>
       </tr>
     <% end %>
