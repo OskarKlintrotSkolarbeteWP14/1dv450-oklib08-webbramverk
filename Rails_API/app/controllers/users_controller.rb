@@ -15,7 +15,8 @@ class UsersController < ApplicationController
     @user = User.new(link_params)
 
     if @user.save
-      redirect_to users_path
+      session[:userid] = @user.id
+      redirect_to apikeys_path
     else
       render :action => "new"
     end

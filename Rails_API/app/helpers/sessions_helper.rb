@@ -1,0 +1,24 @@
+module SessionsHelper
+  def login(user)
+    session[:userid] = user.id
+  end
+
+  def logout
+    session.delete :userid
+  end
+
+  def current_user
+    @current_user ||= User.find(session[:userid]) if session[:userid]
+  end
+
+  def require_login
+    if !is_logged_in? then
+      flash[:danger] = "Du är inte inloggad!"
+      redirect_to login_path
+    end
+  end
+
+  def is_logged_in?
+    !current_user.nil?
+  end
+end

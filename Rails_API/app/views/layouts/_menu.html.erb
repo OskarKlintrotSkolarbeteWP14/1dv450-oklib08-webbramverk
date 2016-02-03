@@ -1,0 +1,9 @@
+<p class="lead">Meny</p>
+<div class="list-group">
+    <a href="/" class="list-group-item active">Hem</a>
+    <% if is_logged_in? %>
+      <%= render "layouts/menu/logged_in" %>
+    <% else %>
+      <%= render "layouts/menu/logged_out" %>
+    <% end %>
+</div>
