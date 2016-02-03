@@ -18,7 +18,7 @@ Rails.application.routes.draw do
   #   resources :products
   # resources :home, only: [:index]
   resources :users, only: [:index, :new, :create], path_names: { new: "register"}
-  resources :keys, only: [:index, :new, :create, :destroy]
+  resources :keys
 
   # Example resource route with options:
   #   resources :products do

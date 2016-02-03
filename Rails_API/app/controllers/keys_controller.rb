@@ -32,6 +32,8 @@ class KeysController < ApplicationController
   end
 
   def destroy
+    flash[:success] = "Applikationen togs bort!"
+    redirect_to keys_path
   end
 
   private
