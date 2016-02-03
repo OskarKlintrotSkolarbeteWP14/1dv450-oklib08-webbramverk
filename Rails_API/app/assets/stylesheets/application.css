@@ -60,3 +60,7 @@
  .field_with_errors label {
    color: red;
  }
+
+.error {
+  color: red;
+}
