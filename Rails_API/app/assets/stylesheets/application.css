@@ -46,3 +46,17 @@
  footer {
      margin: 50px 0;
  }
+
+ .field_with_errors {
+   display: inline;
+   margin: 0;
+ }
+
+ .field_with_errors input {
+   color: red;
+   border: thin solid red;
+ }
+
+ .field_with_errors label {
+   color: red;
+ }
