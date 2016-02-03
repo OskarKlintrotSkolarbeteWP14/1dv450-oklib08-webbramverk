@@ -4,10 +4,10 @@ class User < ActiveRecord::Base
   before_save { self.email = email.downcase }
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 
-  validates :email, presence: { message: "Du måste ange en email!" },
-    length: { maximum: 255, message: "Email-addressen får vara max 255 tecken." },
+  validates :email, presence: { message: "Du måste ange en e-post!" },
+    length: { maximum: 255, message: "E-postadressen får vara max 255 tecken." },
     format: { with: VALID_EMAIL_REGEX },
-    uniqueness: { case_sensitive: false, message: "Email-addressen är redan registrerad." }
+    uniqueness: { case_sensitive: false, message: "E-postadressen är redan registrerad." }
   validates :password, presence: { message: "Du måste ange ett lösenord!" },
     length: { minimum: 6, message: "Lösenordet måste vara minst 6 tecken." },
     confirmation: true

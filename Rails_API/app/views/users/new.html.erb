@@ -21,8 +21,8 @@
 
 <%= form_for @user do |f| %>
   <div  class="form-group">
-    <%= f.label :email, value: "Email" %>
-    <%= f.text_field :email, class: "form-control", placeholder: "Email", type: "email" %>
+    <%= f.label :email, value: "E-post" %>
+    <%= f.text_field :email, class: "form-control", placeholder: "E-post", type: "email" %>
     <% if @user.errors.any? %>
       <% @user.errors.full_messages_for(:email).each do |msg| %>
         <span style="color: red;">
