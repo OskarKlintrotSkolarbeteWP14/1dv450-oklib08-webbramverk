@@ -48,3 +48,5 @@ exit
 rails s -b 0.0.0.0
 exit
 exit
+rails s -b 0.0.0.0
+rake db:migrate VERSION=0

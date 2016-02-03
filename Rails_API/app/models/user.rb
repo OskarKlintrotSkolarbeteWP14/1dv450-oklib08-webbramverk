@@ -1,9 +1,13 @@
 class User < ActiveRecord::Base
   has_many :applications
 
-  validates :username, presence: { message: "Du måste ange ett användarnamn!" },
-    length: { minimum: 3, maximum: 20, message: "Användarnamnet måste vara minst 3 tecken och max 20 tecken." },
-    uniqueness: { case_sensitive: false, message: "Användarnamnet är upptaget." }
+  before_save { self.email = email.downcase }
+  VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
+
+  validates :email, presence: { message: "Du måste ange en email!" },
+    length: { maximum: 255, message: "Email-addressen får vara max 255 tecken." },
+    format: { with: VALID_EMAIL_REGEX },
+    uniqueness: { case_sensitive: false, message: "Email-addressen är redan registrerad." }
   validates :password, presence: { message: "Du måste ange ett lösenord!" },
     length: { minimum: 6, message: "Lösenordet måste vara minst 6 tecken." },
     confirmation: true

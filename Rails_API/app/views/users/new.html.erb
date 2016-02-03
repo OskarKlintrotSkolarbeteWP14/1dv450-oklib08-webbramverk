@@ -21,10 +21,10 @@
 
 <%= form_for @user do |f| %>
   <div  class="form-group">
-    <%= f.label :username, value: "Användarnamn" %>
-    <%= f.text_field :username, class: "form-control", placeholder: "Användarnamn" %>
+    <%= f.label :email, value: "Email" %>
+    <%= f.text_field :email, class: "form-control", placeholder: "Email" %>
     <% if @user.errors.any? %>
-      <% @user.errors.full_messages_for(:username).each do |msg| %>
+      <% @user.errors.full_messages_for(:email).each do |msg| %>
         <span style="color: red;">
           <%= msg %><br />
         </span>
