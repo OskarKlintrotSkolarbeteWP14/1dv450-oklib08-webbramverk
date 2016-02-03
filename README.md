@@ -19,7 +19,7 @@ $ bundle install
 
 Set up the database:
 ``` Bash
-$ rake db:migrate RAILS_ENV=development
+$ rake db:schema:load
 $ rake db:seed # Only if you want a seeded database to play around with!
 ```
 
