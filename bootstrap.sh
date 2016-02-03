@@ -42,10 +42,10 @@ install SQLite sqlite3 libsqlite3-dev
 # GRANT ALL PRIVILEGES ON inexistent_activerecord_unittest.* to 'rails'@'localhost';
 # SQL
 
-install 'Nokogiri dependencies' libxml2 libxml2-dev libxslt1-dev
+install 'Nokogiri dependencies' libxml2 libxml2-dev libxslt1-dev zlib1g-dev
 install 'ExecJS runtime' nodejs
 
 # Needed for docs generation.
 update-locale LANG=en_US.UTF-8 LANGUAGE=en_US.UTF-8 LC_ALL=en_US.UTF-8
 
-echo 'all set, rock on!'
+echo 'All set, rock on!'
