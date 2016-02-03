@@ -1,6 +1,5 @@
 class SessionsController < ApplicationController
   def new
-    @users = User.all
   end
 
   def create
@@ -19,8 +18,5 @@ class SessionsController < ApplicationController
     logout
     flash[:success] = "Du har nu blivit utloggad."
     redirect_to login_path
-  end
-
-  def api_auth
   end
 end
