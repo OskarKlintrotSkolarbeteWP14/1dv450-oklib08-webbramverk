@@ -13,7 +13,7 @@
 
 ActiveRecord::Schema.define(version: 20160128180024) do
 
-  create_table "applications", force: :cascade do |t|
+  create_table "Keys", force: :cascade do |t|
     t.integer  "user_id"
     t.string   "application", limit: 25, null: false
     t.string   "api_key",     limit: 50, null: false

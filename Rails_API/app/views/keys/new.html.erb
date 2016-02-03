@@ -1,0 +1,17 @@
+<% content_for :title, "Registrera en ny applikation" %>
+
+<%= form_for @key, url: keys_path(@key) do |f| %>
+  <div  class="form-group">
+    <%= f.label :application, "Applikation" %>
+    <%= f.text_field :application, class: "form-control", placeholder: "Applikationens namn" %>
+    <% if @key.errors.any? %>
+      <% @key.errors.full_messages_for(:application).each do |msg| %>
+        <span class="error">
+          <%= msg %><br />
+        </span>
+      <% end %>
+    <% end %>
+  </div>
+
+  <button type="submit" class="btn btn-default">Registrera</button>
+<% end %>
