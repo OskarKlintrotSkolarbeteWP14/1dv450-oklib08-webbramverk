@@ -1,0 +1,25 @@
+<% content_for :title, "Registrera en ny användare" %>
+
+<%= form_for @user do |f| %>
+<div  class="form-group">
+    <%= f.label :username, value: "Användarnamn" %>
+    <%= f.text_field :username, class: "form-control", placeholder: "Användarnamn" %>
+  </div>
+  <div  class="form-group">
+    <%= f.label :first_name, value: "Förnamn" %>
+    <%= f.text_field :first_name, class: "form-control", placeholder: "Förnamn" %>
+  </div>
+  <div  class="form-group">
+    <%= f.label :last_name, value: "Efternamn" %>
+    <%= f.text_field :last_name, class: "form-control", placeholder: "Efternamn" %>
+  </div>
+  <div  class="form-group">
+    <%= f.label :password, value: "Lösenord" %>
+    <%= f.text_field :password, class: "form-control", placeholder: "Lösenord", type: "password" %>
+  </div>
+  <div  class="form-group">
+    <%= f.label :password_confirmation, value: "Bekräfta lösenordet" %>
+    <%= f.text_field :password_confirmation, class: "form-control", placeholder: "Bekräfta lösenordet", type: "password" %>
+  </div>
+  <button type="submit" class="btn btn-default">Registrera</button>
+<% end %>

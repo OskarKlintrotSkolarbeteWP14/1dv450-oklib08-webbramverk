@@ -47,7 +47,7 @@
                   <p class="lead">Menu</p>
                   <div class="list-group">
                       <a href="/" class="list-group-item active">Hem</a>
-                      <a href="/home/new" class="list-group-item">Registrera ny användare</a>
+                      <%= link_to "Registrera ny användare", new_user_path, class: "list-group-item" %>
                       <a href="#" class="list-group-item">Registrera ny applikation</a>
                   </div>
               </div>
@@ -55,6 +55,10 @@
               <div class="col-md-9">
 
                   <div>
+                      <h1>
+                        <%= yield :title %>
+                      </h1>
+                      
                       <%= yield %>
                   </div>
 
