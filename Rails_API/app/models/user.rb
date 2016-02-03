@@ -8,11 +8,11 @@ class User < ActiveRecord::Base
 
   validates :email, presence: { message: "Du måste ange en e-post!" },
     length: { maximum: 255, message: "E-postadressen får vara max 255 tecken." },
-    format: { with: VALID_EMAIL_REGEX },
+    format: { with: VALID_EMAIL_REGEX, message: "E-postadressen är inte giltig." },
     uniqueness: { case_sensitive: false, message: "E-postadressen är redan registrerad." }
   validates :password, presence: { message: "Du måste ange ett lösenord!" },
     length: { minimum: 6, message: "Lösenordet måste vara minst 6 tecken." },
-    confirmation: true
+    confirmation: { message: "Lösenorden måste vara samma!" }
   validates :first_name, length: { minimum: 2, maximum: 20, message: "Förnamnet måste vara minst 2 tecken och max 20 tecken." }
   validates :last_name, length: { minimum: 2, maximum: 30, message: "Efternamnet måste vara minst 2 tecken och max 20 tecken." }
 end
