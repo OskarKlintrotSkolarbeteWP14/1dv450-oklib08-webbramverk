@@ -1,6 +1,8 @@
 class User < ActiveRecord::Base
   has_many :applications
 
+  has_secure_password
+
   before_save { self.email = email.downcase }
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 
@@ -13,6 +15,4 @@ class User < ActiveRecord::Base
     confirmation: true
   validates :first_name, length: { minimum: 2, maximum: 20, message: "Förnamnet måste vara minst 2 tecken och max 20 tecken." }
   validates :last_name, length: { minimum: 2, maximum: 30, message: "Efternamnet måste vara minst 2 tecken och max 20 tecken." }
-
-  has_secure_password
 end
