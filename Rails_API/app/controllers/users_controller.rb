@@ -14,9 +14,12 @@ class UsersController < ApplicationController
   def create
     @user = User.new(link_params)
 
+    # No admin page for handling users yet
+    @user.admin = false
+
     if @user.save
       session[:userid] = @user.id
-      redirect_to apikeys_path
+      redirect_to keys_path
     else
       render :action => "new"
     end

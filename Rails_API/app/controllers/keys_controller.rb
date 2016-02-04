@@ -3,9 +3,9 @@ class KeysController < ApplicationController
   before_action :set_cache_buster
 
   def index
-  end
-
-  def show
+    if is_admin?
+      @keys = Key.all.order("application")
+    end
   end
 
   def new
@@ -34,12 +34,9 @@ class KeysController < ApplicationController
   def destroy
     @key = Key.find(destroy_params[:id])
 
-    if @key.user_id != current_user.id
+    if @key.user_id != current_user.id && !is_admin?
       flash[:danger] = "Du har inte rättigheter för att ta bort denna applikationen!"
-      redirect_to keys_path
-    end
-
-    if @key.destroy
+    elsif @key.destroy
       flash[:success] = "Applikationen togs bort!"
     else
       flash[:danger] = "Ett fel uppstod, försök igen senare."

@@ -7,7 +7,7 @@ class SessionsController < ApplicationController
 
     if user && user.authenticate(params[:password])
       login user
-      redirect_to apikeys_path
+      redirect_to keys_path
     else
       flash[:danger] = "Felaktig e-post eller lösenord."
       redirect_to login_path

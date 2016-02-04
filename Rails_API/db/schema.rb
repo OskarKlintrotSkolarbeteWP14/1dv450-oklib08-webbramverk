@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(version: 20160128180024) do
     t.string   "password_digest",             null: false
     t.string   "first_name",      limit: 20
     t.string   "last_name",       limit: 30
+    t.boolean  "admin",                       null: false
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false
   end
