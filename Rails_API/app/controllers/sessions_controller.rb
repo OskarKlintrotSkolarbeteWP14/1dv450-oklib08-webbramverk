@@ -9,14 +9,14 @@ class SessionsController < ApplicationController
       login user
       redirect_to keys_path
     else
-      flash[:danger] = "Felaktig e-post eller lösenord."
+      flash[:danger] = 'Felaktig e-post eller lösenord.'
       redirect_to login_path
     end
   end
 
   def destroy
     logout
-    flash[:success] = "Du har nu blivit utloggad."
+    flash[:success] = 'Du har nu blivit utloggad.'
     redirect_to login_path
   end
 end

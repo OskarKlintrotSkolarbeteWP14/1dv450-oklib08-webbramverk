@@ -12,17 +12,17 @@ module SessionsHelper
   end
 
   def require_login
-    if !is_logged_in? then
+    unless logged_in?
       flash[:danger] = "Du är inte inloggad!"
       redirect_to login_path
     end
   end
 
-  def is_logged_in?
+  def logged_in?
     !current_user.nil?
   end
 
-  def is_admin?
+  def admin?
     current_user.admin
   end
 end

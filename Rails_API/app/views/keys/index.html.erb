@@ -2,12 +2,12 @@
 
 <p>
   Du är inloggad med <strong><%= current_user.email %></strong>
-  <% if is_admin? %>
+  <% if admin? %>
     och har <strong>administratörsrättigheter</strong>
   <% end %>
 </p>
 
-<% if is_admin? %>
+<% if admin? %>
   <%= render "keys/keys" %>
   <%= render "keys/admin" %>
 <% else %>
