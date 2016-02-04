@@ -2,7 +2,7 @@
 
 ## Vagrant setup
 ``` Powershell
-> vagrant plugin install vagrant-vbguest
+> vagrant plugin install vagrant-vbguest # Only if you use VBoxGuestAdditions
 > vagrant up
 > vagrant ssh
 ```
@@ -20,7 +20,9 @@ $ bundle install
 Set up the database:
 ``` Bash
 $ rake db:schema:load
-$ rake db:seed # Only if you want a seeded database to play around with!
+$ rake db:seed # Only if you want a seeded database
+               # to play around with, recommended if
+               # you want a admin-account to use
 ```
 
 Start the server:
