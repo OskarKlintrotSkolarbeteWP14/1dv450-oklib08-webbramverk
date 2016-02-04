@@ -15,12 +15,6 @@ class KeysController < ApplicationController
   def create
     @key = Key.new(link_params)
     @key.user_id = current_user.id
-    @key.api_key = SecureRandom.hex
-
-    # Make sure the key has not been used before
-    while Key.find_by_api_key(@key.api_key) do
-      @key.api_key = SecureRandom.hex
-    end
 
     if @key.save
       session[:keyid] = @key.id
