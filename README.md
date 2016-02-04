@@ -4,7 +4,8 @@
 ``` Powershell
 > vagrant plugin install vagrant-vbguest # Only if you use VBoxGuestAdditions
 > vagrant up
-> vagrant ssh
+> vagrant ssh # Make sure you have a ssh-client installed. If not, add
+              # C:\Program Files\Git\usr\bin to your path to use Git's
 ```
 
 If there is an issue with mounting the shared folders, try updating the guests VBoxGuestAdditions:
