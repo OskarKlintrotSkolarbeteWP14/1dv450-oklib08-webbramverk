@@ -40,13 +40,7 @@ rake db:seed
 rake db:seed
 rake db:migrate RAILS_ENV=development
 rake db:migrate VERSION=0
-rake db:migrate RAILS_ENV=development
 rake db:seed
 rails s -b 0.0.0.0
-rails s -b 0.0.0.0
+rails c
 exit
-rails s -b 0.0.0.0
-exit
-exit
-rails s -b 0.0.0.0
-rake db:migrate VERSION=0
