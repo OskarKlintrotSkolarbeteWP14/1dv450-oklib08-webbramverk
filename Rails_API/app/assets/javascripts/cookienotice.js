@@ -18,7 +18,6 @@ $(document).ready(function(){
 			linkColor: '#CA0000'
 
 	*/
-  console.log("Cookie Notice");
 	$.cookiesDirective({
 		explicitConsent: false,
     position: 'bottom',
