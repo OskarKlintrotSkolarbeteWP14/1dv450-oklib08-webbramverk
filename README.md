@@ -15,6 +15,7 @@ $ sudo ln -s /opt/VBoxGuestAdditions-5.0.14/lib/VBoxGuestAdditions /usr/lib/VBox
 
 SSH into the guest (if prompted for password, it's `vagrant`) and install the dependencies:
 ``` Bash
+$ cd Rails_API
 $ bundle install
 ```
 
