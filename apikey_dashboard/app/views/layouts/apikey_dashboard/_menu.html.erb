@@ -1,0 +1,9 @@
+<p class="lead">Meny</p>
+<div id="app_menu" class="list-group">
+    <%= link_to "Hem", root_path, class: "list-group-item" %>
+    <% if logged_in? %>
+      <%= render "layouts/apikey_dashboard/menu/logged_in" %>
+    <% else %>
+      <%= render "layouts/apikey_dashboard/menu/logged_out" %>
+    <% end %>
+</div>

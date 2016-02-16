@@ -1,0 +1,82 @@
+<% content_for :title, "Registrera en ny användare" %>
+<%
+=begin %>
+<% <% if @user.errors.any? %>
+  <div id="error_messages">
+    <h2><%= @user.errors.count %> fel i formuläret gjorde att användaren inte  kunde registreras:</h2>
+    <ul>
+      <% @user.errors.full_messages.each do |msg| %>
+        <li>
+          <%= msg %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+<%
+=end %>
+
+<%= form_for @user do |f| %>
+  <div  class="form-group">
+    <%= f.label :email, value: "E-post" %>
+    <%= f.text_field :email, class: "form-control", placeholder: "E-post", type: "email" %>
+    <% if @user.errors.any? %>
+      <% @user.errors.full_messages_for(:email).each do |msg| %>
+        <span class="error">
+          <%= msg %><br />
+        </span>
+      <% end %>
+    <% end %>
+  </div>
+
+  <div  class="form-group">
+    <%= f.label :first_name, value: "Förnamn" %>
+    <%= f.text_field :first_name, class: "form-control", placeholder: "Förnamn" %>
+    <% if @user.errors.any? %>
+      <% @user.errors.full_messages_for(:first_name).each do |msg| %>
+        <span class="error">
+          <%= msg %><br />
+        </span>
+      <% end %>
+    <% end %>
+  </div>
+
+  <div  class="form-group">
+    <%= f.label :last_name, value: "Efternamn" %>
+    <%= f.text_field :last_name, class: "form-control", placeholder: "Efternamn" %>
+    <% if @user.errors.any? %>
+      <% @user.errors.full_messages_for(:last_name).each do |msg| %>
+        <span class="error">
+          <%= msg %><br />
+        </span>
+      <% end %>
+    <% end %>
+  </div>
+
+  <div  class="form-group">
+    <%= f.label :password, value: "Lösenord" %>
+    <%= f.text_field :password, class: "form-control", placeholder: "Lösenord", type: "password" %>
+    <% if @user.errors.any? %>
+      <% @user.errors.full_messages_for(:password).each do |msg| %>
+        <span class="error">
+          <%= msg %><br />
+        </span>
+      <% end %>
+    <% end %>
+  </div>
+
+  <div  class="form-group">
+    <%= f.label :password_confirmation, value: "Bekräfta lösenordet" %>
+    <%= f.text_field :password_confirmation, class: "form-control", placeholder: "Bekräfta lösenordet", type: "password" %>
+    <% if @user.errors.any? %>
+      <% @user.errors.full_messages_for(:password_confirmation).each do |msg| %>
+        <span class="error">
+          <%= msg %><br />
+        </span>
+      <% end %>
+    <% end %>
+  </div>
+
+  <button type="submit" class="btn btn-default">Registrera</button>
+<% end %>
+<%= link_to "Logga in", login_path %>

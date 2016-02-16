@@ -1,0 +1,35 @@
+<h2>Alla nycklar</h2>
+<table class="table table-striped table-condensed table-hover table-bordered">
+  <thead>
+    <th>
+      Applikation
+    </th>
+    <th>
+      Nyckel
+    </th>
+    <th>
+      Användare
+    </th>
+    <th>
+
+    </th>
+  </thead>
+  <tbody>
+    <% @keys.each do |key| %>
+      <tr>
+        <td>
+          <%= key.application %>
+        </td>
+        <td>
+          <%= key.api_key %>
+        </td>
+        <td>
+          <%= key.user.email %>
+        </td>
+        <td>
+          <%= link_to "Ta bort", key, method: :delete, class: "btn btn-xs btn-default", data: { confirm: "Är du säker på att du vill ta bort #{key.application}?" } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

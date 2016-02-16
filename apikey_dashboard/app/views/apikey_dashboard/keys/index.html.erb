@@ -1,0 +1,15 @@
+<% content_for :title, "Mina API-nycklar" %>
+
+<p>
+  Du är inloggad med <strong><%= current_user.email %></strong>
+  <% if admin? %>
+    och har <strong>administratörsrättigheter</strong>
+  <% end %>
+</p>
+
+<% if admin? %>
+  <%= render "apikey_dashboard/keys/keys" %>
+  <%= render "apikey_dashboard/keys/admin" %>
+<% else %>
+  <%= render "apikey_dashboard/keys/keys" %>
+<% end %>
