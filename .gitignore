@@ -1,5 +1,6 @@
 *.gem
 *.rbc
+.bash_history
 /.cache/
 /.config/
 /.rpmdb/
