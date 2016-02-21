@@ -9,9 +9,9 @@ Gem::Specification.new do |s|
   s.version     = ApikeyDashboard::VERSION
   s.authors     = [""]
   s.email       = [""]
-  s.homepage    = "TODO"
-  s.summary     = "TODO: Summary of ApikeyDashboard."
-  s.description = "TODO: Description of ApikeyDashboard."
+  s.homepage    = ""
+  s.summary     = "An eninge for registrating applications and developers to the an API."
+  s.description = "Description of ApikeyDashboard."
   s.license     = "MIT"
 
   s.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.rdoc"]
