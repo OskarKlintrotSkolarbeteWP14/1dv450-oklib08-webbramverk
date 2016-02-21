@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160221152210) do
+ActiveRecord::Schema.define(version: 20160221185704) do
 
   create_table "apikey_dashboard_keys", force: :cascade do |t|
     t.integer  "user_id"
@@ -29,6 +29,43 @@ ActiveRecord::Schema.define(version: 20160221152210) do
     t.boolean  "admin",                       null: false
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false
+  end
+
+  create_table "creators", force: :cascade do |t|
+    t.string   "username",                   null: false
+    t.string   "email",                      null: false
+    t.string   "first_name",      limit: 20
+    t.string   "last_name",       limit: 30
+    t.string   "password_digest",            null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+  end
+
+  create_table "events", force: :cascade do |t|
+    t.integer  "position_id"
+    t.integer  "tag_id"
+    t.integer  "creator_id"
+    t.string   "item",        null: false
+    t.string   "note"
+    t.string   "datetime"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  create_table "positions", force: :cascade do |t|
+    t.string   "lng",        null: false
+    t.string   "lat",        null: false
+    t.string   "place",      null: false
+    t.string   "region",     null: false
+    t.string   "country",    null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "tags", force: :cascade do |t|
+    t.string   "name",       null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end
