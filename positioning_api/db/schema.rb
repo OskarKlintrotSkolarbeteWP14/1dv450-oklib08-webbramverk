@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160221185704) do
+ActiveRecord::Schema.define(version: 20160222183537) do
 
   create_table "apikey_dashboard_keys", force: :cascade do |t|
     t.integer  "user_id"
@@ -41,13 +41,13 @@ ActiveRecord::Schema.define(version: 20160221185704) do
     t.datetime "updated_at",                 null: false
   end
 
-  create_table "events", force: :cascade do |t|
+  create_table "ops", force: :cascade do |t|
     t.integer  "position_id"
     t.integer  "tag_id"
     t.integer  "creator_id"
     t.string   "item",        null: false
     t.string   "note"
-    t.string   "datetime"
+    t.datetime "datetime"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
