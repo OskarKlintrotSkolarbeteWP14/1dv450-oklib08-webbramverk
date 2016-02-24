@@ -1,4 +1,19 @@
 Rails.application.routes.draw do
+  resources :users
+  resources :ops
+  resources :positions
+  resources :tags
+
+  # API v1
+  namespace :api do
+    namespace :v1 do
+      resources :users, only: [:index, :create, :show, :update, :destroy]
+      resources :ops, only: [:index, :create, :show, :update, :destroy]
+      resources :positions, only: [:index, :create, :show, :update, :destroy]
+      resources :tags, only: [:index, :create, :show, :update, :destroy]
+    end
+  end
+
   mount ApikeyDashboard::Engine, at: '/dev'
 
   # The priority is based upon order of creation: first created -> highest priority.
