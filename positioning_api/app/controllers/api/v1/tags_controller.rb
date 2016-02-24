@@ -30,7 +30,7 @@ class Api::V1::TagsController < Api::V1::BaseController
 
   def show
     tag = Tag.find(params[:id])
-    render(json: Api::V1::TagSerializer.new(tag).to_json)
+    render(json: Api::V1::TagSerializer.new(tag))
   end
 
   def update
@@ -40,9 +40,9 @@ class Api::V1::TagsController < Api::V1::BaseController
     tag = Tag.find(destroy_params[:id])
 
     if tag.destroy
-      render json: { status: 200, success: 'Tag deleted.' }.to_json
+      render json: { status: 200, success: 'Tag deleted.' }
     else
-      render json: { status: 400, errors: 'Could not delete tag' }.to_json
+      render json: { status: 400, errors: 'Could not delete tag' }
     end
   end
 

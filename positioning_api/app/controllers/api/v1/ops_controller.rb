@@ -14,7 +14,7 @@ class Api::V1::OpsController < Api::V1::BaseController
 
   def show
     ops = Op.find(params[:id])
-    render(json: Api::V1::OpSerializer.new(ops).to_json)
+    render(json: Api::V1::OpSerializer.new(ops))
   end
 
   def update
