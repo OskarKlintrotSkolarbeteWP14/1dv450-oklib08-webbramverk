@@ -15,14 +15,14 @@ class Api::V1::TagsController < Api::V1::BaseController
     if tag.save
       render(
         json: tag,
-        status: 201,
+        status: :created,
         location: api_v1_tag_path(tag.id),
         serializer: Api::V1::TagSerializer
       )
     else
       render(
         json: tag,
-        status: 400, # TODO: What is the correct HTTP status code?
+        status: :bad_request, # TODO: What is the correct HTTP status code?
         serializer: Api::V1::TagSerializer
       )
     end
@@ -40,9 +40,12 @@ class Api::V1::TagsController < Api::V1::BaseController
     tag = Tag.find(destroy_params[:id])
 
     if tag.destroy
-      render json: { status: 200, success: 'Tag deleted.' }
+      head status: :no_content
     else
-      render json: { status: 400, errors: 'Could not delete tag' }
+      render json: {
+        status: 400,
+        errors: 'Could not delete tag'
+      }, status: :bad_request
     end
   end
 
