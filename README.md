@@ -34,6 +34,10 @@ Start the server:
 $ rails server -b 0.0.0.0 # Server runs at http://localhost:8080
 ```
 
+The Postman test-collection is located under `/positioning_api/test/positioning_api.json.postman_collection`. Before each run you need to restore the database so the seed is matching the tests:
+``` Bash
+$ rake db:setup
+```
 
 ## Deprecated instructions for assignment 1
 ### Vagrant setup

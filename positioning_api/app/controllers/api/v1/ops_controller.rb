@@ -12,6 +12,10 @@ class Api::V1::OpsController < Api::V1::BaseController
   def create
     op = Op.new(create_params)
 
+    tags.each do |t|
+      op.tags << Tag.find(t)
+    end
+
     if op.save
       render(
         json: op,
@@ -37,6 +41,11 @@ class Api::V1::OpsController < Api::V1::BaseController
     op = Op.find(params[:id])
 
     if op.update_attributes update_params
+      # TODO: A quick and dirty way to save the tags, needs to be fixed
+      tags.each do |t|
+        op.tags << Tag.find(t)
+      end
+      op.save
       render(
         json: op,
         status: :ok
@@ -70,7 +79,7 @@ class Api::V1::OpsController < Api::V1::BaseController
       {
         position_id: params[:position_id],
         user_id: params[:user_id],
-        tag_ids: params[:tag_ids],
+        tag_ids: params[tag_ids: []],
         item: params[:item],
         note: params[:note],
         datetime: params[:datetime]
@@ -90,5 +99,9 @@ class Api::V1::OpsController < Api::V1::BaseController
 
   def destroy_params
     params.permit(:id)
+  end
+
+  def tags
+    params[:tag_ids]
   end
 end
