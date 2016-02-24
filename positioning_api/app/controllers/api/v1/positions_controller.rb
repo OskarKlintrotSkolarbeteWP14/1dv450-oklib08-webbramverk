@@ -1,4 +1,4 @@
-class Api::V1::PositionsController < ApplicationController
+class Api::V1::PositionsController < Api::V1::BaseController
   def index
     positions = Position.all
     render(
@@ -14,7 +14,7 @@ class Api::V1::PositionsController < ApplicationController
 
   def show
     position = Position.find(params[:id])
-    render(json: Api::V1::PositionSerializer.new(position).to_json)
+    render(json: Api::V1::PositionSerializer.new(position))
   end
 
   def update

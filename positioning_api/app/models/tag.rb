@@ -2,7 +2,7 @@
 class Tag < ActiveRecord::Base
   has_and_belongs_to_many :ops
 
-  validates :name,
+  validates :tag,
             presence: true,
             length: {
               minimum: 2,

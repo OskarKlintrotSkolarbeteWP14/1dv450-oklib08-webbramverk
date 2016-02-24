@@ -1,4 +1,4 @@
-class Api::V1::UsersController < ApplicationController
+class Api::V1::UsersController < Api::V1::BaseController
   def index
     users = User.all
     render(
@@ -14,7 +14,7 @@ class Api::V1::UsersController < ApplicationController
 
   def show
     user = User.find(params[:id])
-    render(json: Api::V1::UserSerializer.new(user).to_json)
+    render(json: Api::V1::UserSerializer.new(user))
   end
 
   def update
