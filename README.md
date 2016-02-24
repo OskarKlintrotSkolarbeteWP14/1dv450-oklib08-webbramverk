@@ -24,11 +24,9 @@ $ cd positioning_api
 $ bundle install
 ```
 
-Set up the database:
+Setup the database:
 ``` Bash
-$ rake db:schema:load
-$ rake db:seed # Only if you want a seeded database to play around with,    
-               # recommended if you want an admin-account to use
+$ rake db:setup
 ```
 
 Start the server:
@@ -57,7 +55,7 @@ $ cd Rails_API
 $ bundle install
 ```
 
-Set up the database:
+Setup the database:
 ``` Bash
 $ rake db:schema:load
 $ rake db:seed # Only if you want a seeded database to play around with,    
