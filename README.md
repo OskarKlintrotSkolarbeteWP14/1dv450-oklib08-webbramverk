@@ -24,11 +24,9 @@ $ cd positioning_api
 $ bundle install
 ```
 
-Set up the database:
+Setup the database:
 ``` Bash
-$ rake db:schema:load
-$ rake db:seed # Only if you want a seeded database to play around with,    
-               # recommended if you want an admin-account to use
+$ rake db:setup
 ```
 
 Start the server:
@@ -36,6 +34,10 @@ Start the server:
 $ rails server -b 0.0.0.0 # Server runs at http://localhost:8080
 ```
 
+The Postman test-collection is located under `/positioning_api/test/positioning_api.json.postman_collection`. Before each run you need to restore the database so the seed is matching the tests:
+``` Bash
+$ rake db:setup
+```
 
 ## Deprecated instructions for assignment 1
 ### Vagrant setup
@@ -57,7 +59,7 @@ $ cd Rails_API
 $ bundle install
 ```
 
-Set up the database:
+Setup the database:
 ``` Bash
 $ rake db:schema:load
 $ rake db:seed # Only if you want a seeded database to play around with,    
