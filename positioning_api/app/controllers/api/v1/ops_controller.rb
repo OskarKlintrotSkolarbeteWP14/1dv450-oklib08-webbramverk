@@ -1,4 +1,4 @@
-class Api::V1::OpsController < ApplicationController
+class Api::V1::OpsController < Api::V1::BaseController
   def index
     ops = Op.all
     render(

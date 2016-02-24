@@ -40,12 +40,12 @@ p2 = Position.create(lng: '56.879004', lat: '14.805852', place: 'Växjö',
 p3 = Position.create(lng: '56.663445', lat: '16.356779', place: 'Kalmar',
                      region: 'Kalmar län', country: 'Sweden')
 
-t1 = Tag.create(name: 'Kyrka')
-t2 = Tag.create(name: 'Skola')
-t3 = Tag.create(name: 'Runsten')
-t4 = Tag.create(name: 'Sjö')
-t5 = Tag.create(name: 'Tåg')
-t6 = Tag.create(name: 'Parkbänk')
+t1 = Tag.create(tag: 'Kyrka')
+t2 = Tag.create(tag: 'Skola')
+t3 = Tag.create(tag: 'Runsten')
+t4 = Tag.create(tag: 'Sjö')
+t5 = Tag.create(tag: 'Tåg')
+t6 = Tag.create(tag: 'Parkbänk')
 
 o1 = Op.create(position_id: p1.id, user_id: u1.id, item: 'Ett test')
 

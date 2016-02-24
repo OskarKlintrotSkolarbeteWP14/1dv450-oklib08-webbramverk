@@ -1,4 +1,4 @@
-class Api::V1::PositionsController < ApplicationController
+class Api::V1::PositionsController < Api::V1::BaseController
   def index
     positions = Position.all
     render(
