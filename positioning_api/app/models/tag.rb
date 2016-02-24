@@ -8,5 +8,6 @@ class Tag < ActiveRecord::Base
               minimum: 2,
               maximum: 20,
               message: 'The tag must be between 2 and 20 charachters!'
-            }
+            },
+            uniqueness: true
 end

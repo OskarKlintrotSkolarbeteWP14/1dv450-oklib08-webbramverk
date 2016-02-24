@@ -2,8 +2,7 @@ class CreateOps < ActiveRecord::Migration
   def change
     create_table :ops do |t|
       t.references :position
-      t.references :tag
-      t.references :creator
+      t.references :user
 
       t.string :item, null: false
       t.string :note

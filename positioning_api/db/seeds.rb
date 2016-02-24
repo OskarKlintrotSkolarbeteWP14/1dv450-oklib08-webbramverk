@@ -11,25 +11,25 @@
 
 ApikeyDashboard::Engine.load_seed
 
-c1 = Creator.create(username: 'Krakan', email: 'krakan@katt.nu',
-                    first_name: 'Krakan', last_name: 'Katt',
-                    password: 'hemligt', password_confirmation: 'hemligt')
+u1 = User.create(username: 'Krakan', email: 'krakan@katt.nu',
+                 first_name: 'Krakan', last_name: 'Katt',
+                 password: 'hemligt', password_confirmation: 'hemligt')
 
-c2 = Creator.create(username: 'Skatan', email: 'skatan@katt.nu',
-                    first_name: 'Skatan', last_name: 'Katt',
-                    password: 'hemligt', password_confirmation: 'hemligt')
+u2 = User.create(username: 'Skatan', email: 'skatan@katt.nu',
+                 first_name: 'Skatan', last_name: 'Katt',
+                 password: 'hemligt', password_confirmation: 'hemligt')
 
-c3 = Creator.create(username: 'Tiger', email: 'tiger@katt.nu',
-                    first_name: 'Tiger', last_name: 'Katt',
-                    password: 'hemligt', password_confirmation: 'hemligt')
+u3 = User.create(username: 'Tiger', email: 'tiger@katt.nu',
+                 first_name: 'Tiger', last_name: 'Katt',
+                 password: 'hemligt', password_confirmation: 'hemligt')
 
-c4 = Creator.create(username: 'Carro', email: 'carro@far.se',
-                    first_name: 'Carro', last_name: 'Får',
-                    password: 'hemligt', password_confirmation: 'hemligt')
+u4 = User.create(username: 'Carro', email: 'carro@far.se',
+                 first_name: 'Carro', last_name: 'Får',
+                 password: 'hemligt', password_confirmation: 'hemligt')
 
-c5 = Creator.create(username: 'Baggen', email: 'baggen@far.se',
-                    first_name: 'Krakan', last_name: 'Får',
-                    password: 'hemligt', password_confirmation: 'hemligt')
+u5 = User.create(username: 'Baggen', email: 'baggen@far.se',
+                 first_name: 'Krakan', last_name: 'Får',
+                 password: 'hemligt', password_confirmation: 'hemligt')
 
 p1 = Position.create(lng: '57.002757', lat: '14.573297', place: 'Moheda',
                      region: 'Kronobergs län', country: 'Sweden')
@@ -47,20 +47,25 @@ t4 = Tag.create(name: 'Sjö')
 t5 = Tag.create(name: 'Tåg')
 t6 = Tag.create(name: 'Parkbänk')
 
-Op.create(position_id: p1.id, tag_id: t1.id,
-          creator_id: c1.id, item: 'Ett test')
+o1 = Op.create(position_id: p1.id, user_id: u1.id, item: 'Ett test')
 
-Op.create(position_id: p2.id, tag_id: t2.id,
-          creator_id: c2.id, item: 'Ett test')
+o2 = Op.create(position_id: p2.id, user_id: u2.id, item: 'Ett annat test')
 
-Op.create(position_id: p3.id, tag_id: t3.id,
-          creator_id: c3.id, item: 'Ett test')
+o3 = Op.create(position_id: p3.id, user_id: u3.id, item: 'Ett till test')
 
-Op.create(position_id: p1.id, tag_id: t4.id,
-          creator_id: c4.id, item: 'Ett test')
+o4 = Op.create(position_id: p1.id, user_id: u4.id, item: 'Ännu ett test')
 
-Op.create(position_id: p2.id, tag_id: t5.id,
-          creator_id: c5.id, item: 'Ett test')
+o5 = Op.create(position_id: p2.id, user_id: u5.id, item: 'Nästan sista testet')
 
-Op.create(position_id: p3.id, tag_id: t6.id,
-          creator_id: c1.id, item: 'Ett test')
+o6 = Op.create(position_id: p3.id, user_id: u1.id, item: 'Ett sista test')
+
+o1.tags << t1
+o1.tags << t2
+o2.tags << t3
+o3.tags << t4
+o3.tags << t5
+o4.tags << t6
+o4.tags << t1
+o4.tags << t2
+o5.tags << t3
+o6.tags << t4
