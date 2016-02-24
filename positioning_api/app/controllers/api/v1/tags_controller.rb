@@ -37,6 +37,13 @@ class Api::V1::TagsController < Api::V1::BaseController
   end
 
   def destroy
+    tag = Tag.find(destroy_params[:id])
+
+    if tag.destroy
+      render json: { status: 200, success: 'Tag deleted.' }.to_json
+    else
+      render json: { status: 400, errors: 'Could not delete tag' }.to_json
+    end
   end
 
   private
@@ -49,5 +56,9 @@ class Api::V1::TagsController < Api::V1::BaseController
       }
     )
     parameters.require(:tag).permit(:tag)
+  end
+
+  def destroy_params
+    params.permit(:id)
   end
 end
