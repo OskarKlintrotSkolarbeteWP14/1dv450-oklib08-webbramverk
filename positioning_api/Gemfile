@@ -34,6 +34,9 @@ gem 'jwt', '~> 1.5.2'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+# Using serializers
+gem 'active_model_serializers'
+
 # My engine for registrating new developer and applications to the API
 gem 'apikey_dashboard', path: '../apikey_dashboard'
 
