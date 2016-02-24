@@ -34,6 +34,19 @@ class Api::V1::TagsController < Api::V1::BaseController
   end
 
   def update
+    tag = Tag.find(params[:id])
+
+    if tag.update_attributes update_params
+      render(
+        json: tag,
+        status: :ok
+      )
+    else
+      render json: {
+        status: 400,
+        errors: 'Could not update tag'
+      }, status: :bad_request
+    end
   end
 
   def destroy
@@ -59,6 +72,10 @@ class Api::V1::TagsController < Api::V1::BaseController
       }
     )
     parameters.require(:tag).permit(:tag)
+  end
+
+  def update_params
+    create_params
   end
 
   def destroy_params
