@@ -12,8 +12,14 @@ class Api::V1::OpsController < Api::V1::BaseController
   def create
     op = Op.new(create_params)
 
-    tags.each do |t|
+    tag_ids.each do |t|
       op.tags << Tag.find(t)
+    end
+
+    tags.each do |t|
+      logger.debug t
+      tag = Tag.find_by(tag: t) || Tag.create(tag: t)
+      op.tags << tag
     end
 
     if op.save
@@ -42,8 +48,13 @@ class Api::V1::OpsController < Api::V1::BaseController
 
     if op.update_attributes update_params
       # TODO: A quick and dirty way to save the tags, needs to be fixed
-      tags.each do |t|
+      tag_ids.each do |t|
         op.tags << Tag.find(t)
+      end
+      tags.each do |t|
+        logger.debug t
+        tag = Tag.find_by(tag: t) || Tag.create(tag: t)
+        op.tags << tag
       end
       op.save
       render(
@@ -101,7 +112,11 @@ class Api::V1::OpsController < Api::V1::BaseController
     params.permit(:id)
   end
 
-  def tags
+  def tag_ids
     params[:tag_ids]
+  end
+
+  def tags
+    params[:tags]
   end
 end
