@@ -7,6 +7,7 @@ class Api::V1::OpsController < Api::V1::BaseController
     position_id = params[:position_id]
     user_id = params[:user_id]
     sort = params[:sort]
+    search = params[:search]
     sort_order = :updated_at if sort == 'updated'
     sort_order = :created_at if sort == 'created'
 
@@ -26,6 +27,12 @@ class Api::V1::OpsController < Api::V1::BaseController
     end
 
     ops = ops.limit(@limit).offset(@offset) if ops # Not very functional
+
+    unless search.nil?
+      ops = Op.where('item like ?', "%#{search}%")
+              .limit(@limit)
+              .offset(@offset)
+    end
 
     ops = Op.all
             .order(sort_order)
