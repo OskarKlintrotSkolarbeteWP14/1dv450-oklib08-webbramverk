@@ -3,8 +3,6 @@ class Api::V1::OpsController < Api::V1::BaseController
     tag_id = params[:tag_id]
     position_id = params[:position_id]
     user_id = params[:user_id]
-    limit = params[:limit].nil? ? 100 : params[:limit].to_i
-    offset = params[:offset].nil? ? 0 : params[:offset].to_i
 
     unless tag_id.nil?
       tag = Tag.find(tag_id)

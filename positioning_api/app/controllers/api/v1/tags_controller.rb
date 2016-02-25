@@ -1,6 +1,6 @@
 class Api::V1::TagsController < Api::V1::BaseController
   def index
-    tags = Tag.all
+    tags = Tag.all.limit(limit).offset(offset)
     render(
       json: ActiveModel::ArraySerializer.new(
         tags,

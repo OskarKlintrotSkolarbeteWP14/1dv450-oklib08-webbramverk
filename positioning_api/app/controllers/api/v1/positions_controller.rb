@@ -1,6 +1,6 @@
 class Api::V1::PositionsController < Api::V1::BaseController
   def index
-    positions = Position.all
+    positions = Position.all.limit(limit).offset(offset)
     render(
       json: ActiveModel::ArraySerializer.new(
         positions,
