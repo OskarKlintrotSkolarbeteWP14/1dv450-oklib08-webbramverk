@@ -1,6 +1,8 @@
 class Api::V1::UsersController < Api::V1::BaseController
+  before_action :offset_params, only: [:index]
+
   def index
-    users = User.all.limit(limit).offset(offset)
+    users = User.all.limit(@limit).offset(@offset)
     render(
       json: ActiveModel::ArraySerializer.new(
         users,

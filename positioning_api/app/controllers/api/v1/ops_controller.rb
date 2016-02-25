@@ -1,4 +1,6 @@
 class Api::V1::OpsController < Api::V1::BaseController
+  before_action :offset_params, only: [:index]
+
   def index
     tag_id = params[:tag_id]
     position_id = params[:position_id]
@@ -22,12 +24,12 @@ class Api::V1::OpsController < Api::V1::BaseController
       ops = user.ops
     end
 
-    ops = ops.limit(limit).offset(offset) if ops # Not very functional
+    ops = ops.limit(@limit).offset(@offset) if ops # Not very functional
 
     ops = Op.all
             .order(sort_order)
-            .limit(limit)
-            .offset(offset)
+            .limit(@limit)
+            .offset(@offset)
             .reverse unless ops
 
     render(

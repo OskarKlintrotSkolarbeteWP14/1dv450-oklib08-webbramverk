@@ -13,11 +13,8 @@ class Api::V1::BaseController < ApplicationController
     render json: { status: 404, errors: 'Not found' }, status: :not_found
   end
 
-  def limit
-    params[:limit].nil? ? 100 : params[:limit].to_i
-  end
-
-  def offset
-    params[:offset].nil? ? 0 : params[:offset].to_i
+  def offset_params
+    @offset = params[:offset].nil? ? 0 : params[:offset].to_i
+    @limit = params[:limit].nil? ? 100 : params[:limit].to_i
   end
 end

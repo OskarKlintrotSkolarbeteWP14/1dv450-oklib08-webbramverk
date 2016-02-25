@@ -1,6 +1,8 @@
 class Api::V1::PositionsController < Api::V1::BaseController
+  before_action :offset_params, only: [:index]
+
   def index
-    positions = Position.all.limit(limit).offset(offset)
+    positions = Position.all.limit(@limit).offset(@offset)
     render(
       json: ActiveModel::ArraySerializer.new(
         positions,

@@ -1,6 +1,8 @@
 class Api::V1::TagsController < Api::V1::BaseController
+  before_action :offset_params, only: [:index]
+
   def index
-    tags = Tag.all.limit(limit).offset(offset)
+    tags = Tag.all.limit(@limit).offset(@offset)
     render(
       json: ActiveModel::ArraySerializer.new(
         tags,
