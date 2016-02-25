@@ -19,7 +19,7 @@ module Api::V1::AuthHelper
   end
 
   def encodeJWT(user)
-    # exp should definitely be in a config file!
+    # TODO: exp should definitely be in a config file!
     payload = { user_id: user.id, exp: 2.hours.from_now.to_i }
     JWT.encode(
       payload,

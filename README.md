@@ -38,7 +38,7 @@ The Postman test-collection is located under `/positioning_api/test/positioning_
 ``` Bash
 $ rake db:setup
 ```
-Before your first run you must run `POST auth`, mark the token and right-click on it and save it in the `positioning_api` as the `token`. If you can't get the correct menu when right-clicking then just choose the environment-menu and choose `Manage environment`, choose `positioning_api` and paste it as the `token`.
+Before your first run you must run `POST auth`, mark the token and right-click on it and save it in the `positioning_api` as the `token`. If you can't get the correct menu when right-clicking then just choose the environment-menu and choose `Manage environment`, choose `positioning_api` and paste it as the `token`. Also note that the collection is meant to run in order, starting with getting the JWT and ending with deleting the current user and after that you must restore the database before continuing! On last note, for some very strange reason the very first tokens might be broken after initializing the vagrant box for the first time. Just get a new token and try again, but don't forget to restore the database!
 
 ## Deprecated instructions for assignment 1
 ### Vagrant setup
