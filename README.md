@@ -34,10 +34,11 @@ Start the server:
 $ rails server -b 0.0.0.0 # Server runs at http://localhost:8080
 ```
 
-The Postman test-collection is located under `/positioning_api/test/positioning_api.json.postman_collection`. Before each run you need to restore the database so the seed is matching the tests:
+The Postman test-collection is located under `/positioning_api/test/positioning_api.json.postman_collection` and you also need to import the environment file that is located at `/positioning_api/test/positioning_api.postman_environment`. Before each run you need to restore the database so the seed is matching the tests:
 ``` Bash
 $ rake db:setup
 ```
+Before your first run you must run `POST auth`, mark the token and right-click on it and save it in the `positioning_api` as the `token`. If you can't get the correct menu when right-clicking then just choose the environment-menu and choose `Manage environment`, choose `positioning_api` and paste it as the `token`.
 
 ## Deprecated instructions for assignment 1
 ### Vagrant setup

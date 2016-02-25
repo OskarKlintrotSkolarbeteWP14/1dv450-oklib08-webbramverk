@@ -2,6 +2,8 @@ Rails.application.routes.draw do
   # API v1
   namespace :api do
     namespace :v1 do
+      post '/auth' => 'auth#api_auth'
+
       resources :users, only: [:index, :create, :show, :update, :destroy] do
         resources :ops, only: [:index, :show]
       end
@@ -15,6 +17,7 @@ Rails.application.routes.draw do
     end
   end
 
+  # Engine for registrating new developers and applications
   mount ApikeyDashboard::Engine, at: '/dev'
 
   # The priority is based upon order of creation: first created -> highest priority.

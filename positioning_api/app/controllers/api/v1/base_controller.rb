@@ -1,10 +1,12 @@
 # A BaseController for v1 of this API
 class Api::V1::BaseController < ApplicationController
   protect_from_forgery with: :null_session
-  before_action :destroy_session
-  before_action :validate_api_key
   include Api::V1::BaseHelper
   include ApikeyDashboard::KeysHelper
+  include Api::V1::AuthHelper
+  before_action :destroy_session
+  before_action :validate_api_key
+  before_action :api_authenticate
   rescue_from ActiveRecord::RecordNotFound, with: :not_found
 
   def destroy_session

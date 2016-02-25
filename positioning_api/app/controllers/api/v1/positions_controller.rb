@@ -1,5 +1,6 @@
 class Api::V1::PositionsController < Api::V1::BaseController
   before_action :offset_params, only: [:index]
+  skip_before_action :api_authenticate, only: [:index, :show]
 
   def index
     positions = Position.all.limit(@limit).offset(@offset)

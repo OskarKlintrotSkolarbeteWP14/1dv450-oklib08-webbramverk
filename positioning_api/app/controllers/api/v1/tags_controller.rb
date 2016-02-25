@@ -1,5 +1,6 @@
 class Api::V1::TagsController < Api::V1::BaseController
   before_action :offset_params, only: [:index]
+  skip_before_action :api_authenticate, only: [:index, :show]
 
   def index
     tags = Tag.all.limit(@limit).offset(@offset)

@@ -1,5 +1,6 @@
 class Api::V1::UsersController < Api::V1::BaseController
   before_action :offset_params, only: [:index]
+  skip_before_action :api_authenticate, only: [:index, :show]
 
   def index
     users = User.all.limit(@limit).offset(@offset)
@@ -13,7 +14,6 @@ class Api::V1::UsersController < Api::V1::BaseController
 
   def create
     user = User.new(create_params)
-
     if user.save
       render(
         json: user,

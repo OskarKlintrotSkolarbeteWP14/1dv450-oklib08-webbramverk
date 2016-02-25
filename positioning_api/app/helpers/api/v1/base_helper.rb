@@ -1,5 +1,4 @@
 module Api::V1::BaseHelper
-
   def all_parameters
     ActionController::Parameters.new(
       op:
