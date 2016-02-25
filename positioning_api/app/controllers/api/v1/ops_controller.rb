@@ -3,6 +3,9 @@ class Api::V1::OpsController < Api::V1::BaseController
     tag_id = params[:tag_id]
     position_id = params[:position_id]
     user_id = params[:user_id]
+    sort = params[:sort]
+    sort_order = :updated_at if sort == 'updated'
+    sort_order = :created_at if sort == 'created'
 
     unless tag_id.nil?
       tag = Tag.find(tag_id)
@@ -21,7 +24,11 @@ class Api::V1::OpsController < Api::V1::BaseController
 
     ops = ops.limit(limit).offset(offset) if ops # Not very functional
 
-    ops = Op.all.limit(limit).offset(offset) unless ops
+    ops = Op.all
+            .order(sort_order)
+            .limit(limit)
+            .offset(offset)
+            .reverse unless ops
 
     render(
       json: ActiveModel::ArraySerializer.new(
