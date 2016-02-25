@@ -2,10 +2,16 @@ Rails.application.routes.draw do
   # API v1
   namespace :api do
     namespace :v1 do
-      resources :users, only: [:index, :create, :show, :update, :destroy]
+      resources :users, only: [:index, :create, :show, :update, :destroy] do
+        resources :ops, only: [:index, :show]
+      end
       resources :ops, only: [:index, :create, :show, :update, :destroy]
-      resources :positions, only: [:index, :create, :show, :update, :destroy]
-      resources :tags, only: [:index, :create, :show, :update, :destroy]
+      resources :positions, only: [:index, :create, :show, :update, :destroy] do
+        resources :ops, only: [:index, :show]
+      end
+      resources :tags, only: [:index, :create, :show, :update, :destroy] do
+        resources :ops, only: [:index, :show]
+      end
     end
   end
 

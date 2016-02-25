@@ -65,17 +65,7 @@ class Api::V1::UsersController < Api::V1::BaseController
   private
 
   def create_params
-    parameters = ActionController::Parameters.new(
-      user:
-      {
-        username: params[:username],
-        email: params[:email],
-        first_name: params[:first_name],
-        last_name: params[:last_name],
-        password: params[:password],
-        password_confirmation: params[:password_confirmation]
-      }
-    )
+    parameters =  all_parameters
     parameters.require(:user).permit(:username,
                                      :email,
                                      :first_name,

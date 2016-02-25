@@ -65,12 +65,7 @@ class Api::V1::TagsController < Api::V1::BaseController
   private
 
   def create_params
-    parameters = ActionController::Parameters.new(
-      tag:
-      {
-        tag: params[:tag]
-      }
-    )
+    parameters = all_parameters
     parameters.require(:tag).permit(:tag)
   end
 

@@ -65,16 +65,7 @@ class Api::V1::PositionsController < Api::V1::BaseController
   private
 
   def create_params
-    parameters = ActionController::Parameters.new(
-      position:
-      {
-        lng: params[:lng],
-        lat: params[:lat],
-        place: params[:place],
-        region: params[:region],
-        country: params[:country]
-      }
-    )
+    parameters = all_parameters
     parameters.require(:position).permit(:lng,
                                          :lat,
                                          :place,

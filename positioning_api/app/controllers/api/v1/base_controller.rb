@@ -2,6 +2,7 @@
 class Api::V1::BaseController < ApplicationController
   protect_from_forgery with: :null_session
   before_action :destroy_session
+  include Api::V1::BaseHelper
   rescue_from ActiveRecord::RecordNotFound, with: :not_found
 
   def destroy_session

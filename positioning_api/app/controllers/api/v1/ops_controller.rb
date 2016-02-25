@@ -1,6 +1,25 @@
 class Api::V1::OpsController < Api::V1::BaseController
   def index
-    ops = Op.all
+    tag_id = params[:tag_id]
+    position_id = params[:position_id]
+    user_id = params[:user_id]
+
+    unless tag_id.nil?
+      tag = Tag.find(tag_id)
+      ops = tag.ops
+    end
+
+    unless position_id.nil?
+      position = Position.find(position_id)
+      ops = position.ops
+    end
+
+    unless user_id.nil?
+      user = User.find(user_id)
+      ops = user.ops
+    end
+
+    ops = Op.all unless ops
     render(
       json: ActiveModel::ArraySerializer.new(
         ops,
@@ -83,17 +102,7 @@ class Api::V1::OpsController < Api::V1::BaseController
   private
 
   def create_params
-    parameters = ActionController::Parameters.new(
-      op:
-      {
-        position_id: params[:position_id],
-        user_id: params[:user_id],
-        tag_ids: params[tag_ids: []],
-        item: params[:item],
-        note: params[:note],
-        datetime: params[:datetime]
-      }
-    )
+    parameters = all_parameters
     parameters.require(:op).permit(:position_id,
                                    :user_id,
                                    :tag_ids,
