@@ -1,5 +1,6 @@
 class Api::V1::TagsController < Api::V1::BaseController
   before_action :offset_params, only: [:index]
+  skip_before_action :api_authenticate, only: [:index, :show]
 
   def index
     tags = Tag.all.limit(@limit).offset(@offset)
@@ -13,6 +14,7 @@ class Api::V1::TagsController < Api::V1::BaseController
 
   def create
     tag = Tag.new(create_params)
+    tag.user_id = @current_user
 
     if tag.save
       render(
@@ -38,29 +40,27 @@ class Api::V1::TagsController < Api::V1::BaseController
   def update
     tag = Tag.find(params[:id])
 
-    if tag.update_attributes update_params
+    if not_authenticated? tag
+      unauthorized(:update, :tag)
+    elsif tag.update_attributes update_params
       render(
         json: tag,
         status: :ok
       )
     else
-      render json: {
-        status: 400,
-        errors: 'Could not update tag'
-      }, status: :bad_request
+      bad_request(:update, :tag)
     end
   end
 
   def destroy
     tag = Tag.find(destroy_params[:id])
 
-    if tag.destroy
+    if not_authenticated? tag
+      unauthorized(:delete, :tag)
+    elsif tag.destroy
       head status: :no_content
     else
-      render json: {
-        status: 400,
-        errors: 'Could not delete tag'
-      }, status: :bad_request
+      bad_request(:delete, :tag)
     end
   end
 
