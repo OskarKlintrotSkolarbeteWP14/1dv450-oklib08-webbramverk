@@ -3,6 +3,8 @@ class Api::V1::OpsController < Api::V1::BaseController
     tag_id = params[:tag_id]
     position_id = params[:position_id]
     user_id = params[:user_id]
+    limit = params[:limit].nil? ? 100 : params[:limit].to_i
+    offset = params[:offset].nil? ? 0 : params[:offset].to_i
 
     unless tag_id.nil?
       tag = Tag.find(tag_id)
@@ -19,7 +21,10 @@ class Api::V1::OpsController < Api::V1::BaseController
       ops = user.ops
     end
 
-    ops = Op.all unless ops
+    ops = ops.limit(limit).offset(offset) if ops # Not very functional
+
+    ops = Op.all.limit(limit).offset(offset) unless ops
+
     render(
       json: ActiveModel::ArraySerializer.new(
         ops,
