@@ -17,7 +17,6 @@ class Api::V1::OpsController < Api::V1::BaseController
     end
 
     tags.each do |t|
-      logger.debug t
       tag = Tag.find_by_tag(t) || Tag.create(tag: t)
       op.tags << tag
     end
@@ -52,7 +51,6 @@ class Api::V1::OpsController < Api::V1::BaseController
         op.tags << Tag.find(t)
       end
       tags.each do |t|
-        logger.debug t
         tag = Tag.find_by_tag(t) || Tag.create(tag: t)
         op.tags << tag
       end
