@@ -2,8 +2,11 @@
 # place, region and country to make it possible to search
 # through the table
 class Position < ActiveRecord::Base
+  belongs_to :user
   has_many :ops
 
+  validates :user_id,
+            presence: true
   validates :lng,
             presence: true
   validates :lat,

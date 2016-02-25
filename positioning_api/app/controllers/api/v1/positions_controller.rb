@@ -14,6 +14,7 @@ class Api::V1::PositionsController < Api::V1::BaseController
 
   def create
     position = Position.new(create_params)
+    position.user_id = @current_user
 
     if position.save
       render(
@@ -39,29 +40,27 @@ class Api::V1::PositionsController < Api::V1::BaseController
   def update
     position = Position.find(params[:id])
 
-    if position.update_attributes update_params
+    if not_authenticated? position
+      unauthorized(:opdate, :position)
+    elsif position.update_attributes update_params
       render(
         json: position,
         status: :ok
       )
     else
-      render json: {
-        status: 400,
-        errors: 'Could not update position'
-      }, status: :bad_request
+      bad_request(:update, :position)
     end
   end
 
   def destroy
     position = Position.find(destroy_params[:id])
 
-    if position.destroy
+    if not_authenticated? position
+      unauthorized(:delete, :position)
+    elsif position.destroy
       head status: :no_content
     else
-      render json: {
-        status: 400,
-        errors: 'Could not delete position'
-      }, status: :bad_request
+      bad_request(:delete, :position)
     end
   end
 

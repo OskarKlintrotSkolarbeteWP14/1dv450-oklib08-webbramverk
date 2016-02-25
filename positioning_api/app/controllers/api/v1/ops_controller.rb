@@ -43,13 +43,14 @@ class Api::V1::OpsController < Api::V1::BaseController
 
   def create
     op = Op.new(create_params)
+    op.user_id = @current_user
 
     tag_ids.each do |t|
-      op.tags << Tag.find(t)
+      op.tags << Tag.find(t) unless Tag.find(t)
     end
 
     tags.each do |t|
-      tag = Tag.find_by_tag(t) || Tag.create(tag: t)
+      tag = Tag.find_by_tag(t) || Tag.create(tag: t, user_id: @current_user)
       op.tags << tag
     end
 
@@ -77,13 +78,15 @@ class Api::V1::OpsController < Api::V1::BaseController
   def update
     op = Op.find(params[:id])
 
-    if op.update_attributes update_params
+    if not_authenticated? op
+      unauthorized(:update, :op)
+    elsif op.update_attributes update_params
       # TODO: A quick and dirty way to save the tags, needs to be fixed
       tag_ids.each do |t|
         op.tags << Tag.find(t)
       end
       tags.each do |t|
-        tag = Tag.find_by_tag(t) || Tag.create(tag: t)
+        tag = Tag.find_by_tag(t) || Tag.create(tag: t, user_id: @current_user)
         op.tags << tag
       end
       op.save
@@ -92,23 +95,19 @@ class Api::V1::OpsController < Api::V1::BaseController
         status: :ok
       )
     else
-      render json: {
-        status: 400,
-        errors: 'Could not update op'
-      }, status: :bad_request
+      bad_request(:update, :op)
     end
   end
 
   def destroy
     op = Op.find(destroy_params[:id])
 
-    if op.destroy
+    if not_authenticated? op
+      unauthorized(:delete, :op)
+    elsif op.destroy
       head status: :no_content
     else
-      render json: {
-        status: 400,
-        errors: 'Could not delete op'
-      }, status: :bad_request
+      bad_request(:delete, :op)
     end
   end
 
@@ -117,7 +116,6 @@ class Api::V1::OpsController < Api::V1::BaseController
   def create_params
     parameters = all_parameters
     parameters.require(:op).permit(:position_id,
-                                   :user_id,
                                    :tag_ids,
                                    :item,
                                    :note,

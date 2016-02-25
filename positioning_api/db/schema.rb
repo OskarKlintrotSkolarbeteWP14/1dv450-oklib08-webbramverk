@@ -50,6 +50,7 @@ ActiveRecord::Schema.define(version: 20160224120220) do
   add_index "ops_tags", ["tag_id", "op_id"], name: "index_ops_tags_on_tag_id_and_op_id"
 
   create_table "positions", force: :cascade do |t|
+    t.integer  "user_id",    null: false
     t.string   "lng",        null: false
     t.string   "lat",        null: false
     t.string   "place",      null: false
@@ -60,6 +61,7 @@ ActiveRecord::Schema.define(version: 20160224120220) do
   end
 
   create_table "tags", force: :cascade do |t|
+    t.integer  "user_id",    null: false
     t.string   "tag",        null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

@@ -1,6 +1,6 @@
 class Api::V1::UsersController < Api::V1::BaseController
   before_action :offset_params, only: [:index]
-  skip_before_action :api_authenticate, only: [:index, :show]
+  skip_before_action :api_authenticate, only: [:index, :show, :create]
 
   def index
     users = User.all.limit(@limit).offset(@offset)
@@ -38,36 +38,36 @@ class Api::V1::UsersController < Api::V1::BaseController
   def update
     user = User.find(params[:id])
 
-    if user.update_attributes update_params
+    if user.id != @current_user
+      unauthorized(:update, :user)
+    elsif user.update_attributes update_params
       render(
         json: user,
         status: :ok
       )
     else
-      render json: {
-        status: 400,
-        errors: 'Could not update user'
-      }, status: :bad_request
+      bad_request(:update, :user)
     end
   end
 
   def destroy
     user = User.find(destroy_params[:id])
 
-    if user.destroy
+    if user.id != @current_user
+      unauthorized(:delete, :user)
+    elsif user.destroy
+      @current_user = nil
+      logger.debug "@current_user: #{@current_user}"
       head status: :no_content
     else
-      render json: {
-        status: 400,
-        errors: 'Could not delete user'
-      }, status: :bad_request
+      bad_request(:delete, :user)
     end
   end
 
   private
 
   def create_params
-    parameters =  all_parameters
+    parameters = all_parameters
     parameters.require(:user).permit(:username,
                                      :email,
                                      :first_name,

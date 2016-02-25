@@ -16,7 +16,7 @@ class Api::V1::BaseSerializer < ActiveModel::Serializer
     end
   end
 
-  def user
+  def created_by
     if object.user_id
       {
         id: object.user.id,

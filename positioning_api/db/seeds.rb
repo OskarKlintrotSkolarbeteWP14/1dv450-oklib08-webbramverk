@@ -31,21 +31,24 @@ u5 = User.create(username: 'Baggen', email: 'baggen@far.se',
                  first_name: 'Krakan', last_name: 'Får',
                  password: 'hemligt', password_confirmation: 'hemligt')
 
-p1 = Position.create(lng: '57.002757', lat: '14.573297', place: 'Moheda',
-                     region: 'Kronobergs län', country: 'Sweden')
+p1 = Position.create(lng: '57.002757', lat: '14.573297',
+                     place: 'Moheda', region: 'Kronobergs län',
+                     country: 'Sweden', user_id: u1.id)
 
-p2 = Position.create(lng: '56.879004', lat: '14.805852', place: 'Växjö',
-                     region: 'Kronobergs län', country: 'Sweden')
+p2 = Position.create(lng: '56.879004', lat: '14.805852',
+                     place: 'Växjö', region: 'Kronobergs län',
+                     country: 'Sweden', user_id: u1.id)
 
-p3 = Position.create(lng: '56.663445', lat: '16.356779', place: 'Kalmar',
-                     region: 'Kalmar län', country: 'Sweden')
+p3 = Position.create(lng: '56.663445', lat: '16.356779',
+                     place: 'Kalmar', region: 'Kalmar län',
+                     country: 'Sweden', user_id: u2.id)
 
-t1 = Tag.create(tag: 'Kyrka')
-t2 = Tag.create(tag: 'Skola')
-t3 = Tag.create(tag: 'Runsten')
-t4 = Tag.create(tag: 'Sjö')
-t5 = Tag.create(tag: 'Tåg')
-t6 = Tag.create(tag: 'Parkbänk')
+t1 = Tag.create(tag: 'Kyrka', user_id: u1.id)
+t2 = Tag.create(tag: 'Skola', user_id: u3.id)
+t3 = Tag.create(tag: 'Runsten', user_id: u5.id)
+t4 = Tag.create(tag: 'Sjö', user_id: u2.id)
+t5 = Tag.create(tag: 'Tåg', user_id: u4.id)
+t6 = Tag.create(tag: 'Parkbänk', user_id: u1.id)
 
 o1 = Op.create(position_id: p1.id, user_id: u1.id, item: 'Ett test')
 
