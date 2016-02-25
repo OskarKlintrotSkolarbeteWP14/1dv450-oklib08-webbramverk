@@ -5,6 +5,9 @@ module ApikeyDashboard
         self.api_key = SecureRandom.hex
         break unless self.class.exists? api_key: api_key
       end
+      # An ugly hack to make sure that we have a known key for testing
+      self.api_key = '4596a2c301f468c24447e67ab0035523' unless
+      self.class.exists? api_key: '4596a2c301f468c24447e67ab0035523'
     end
 
     def correct_rights(key)
@@ -21,6 +24,10 @@ module ApikeyDashboard
 
     def an_error_accured
       flash[:danger] = 'Ett fel uppstod, försök igen senare.'
+    end
+
+    def valid_api_key(api_key)
+      Key.where(api_key: api_key).exists?
     end
   end
 end
