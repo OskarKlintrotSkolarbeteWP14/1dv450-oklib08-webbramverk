@@ -1,4 +1,7 @@
 Rails.application.configure do
+  # To prevent Rails from mangle AngularJS and break something, might not be needed since we get the asssets from the CDN and not Rails app
+  config.assets.js_compressor = Uglifier.new(mangle: false)
+
   # Settings specified here will take precedence over those in config/application.rb.
 
   # Code is not reloaded between requests.
