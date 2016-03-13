@@ -38,6 +38,8 @@
     "node": ">=0.10.0"
   },
   "scripts": {
+    "start": "grunt serve",
+    "build": "grunt --force",
     "test": "karma start test\\karma.conf.js"
   }
 }

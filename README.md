@@ -40,10 +40,24 @@ This app needs npm and Node to be installed and up to date.
 
 #### Setup
 
-Install the dependencies:
+Install the dependencies for building the project:
+```Powershell
+> npm install -g grunt-cli bower nodemon
+# Make sure it works
+> grunt --version
+> bower -v
+> nodemon -v
+```
+
+If Grunt, Bower and Nodemon is not working, try to add `%AppData%\Roaming\npm` to your __user variable__ `PATH` and restart Windows.
+
+Install the project dependencies:
 ```Powershell
 > cd .\angularApp\server
-> npm Install
+> npm install
+> cd ..\client
+> npm install # This will take a lot of time!
+> bower install
 ```
 
 #### Development
@@ -53,19 +67,19 @@ Open two different terminals, one for Grunt and one for Node. Both will be runni
 Serve the Angular app with Grunt:
 ```Powershell
 > cd .\angularApp\client
-> grunt serve
+> npm start
 ```
 
 Start the Node server hosting the Angular app that is being built with Grunt. In Windows:
 ```Powershell
 > cd .\angularApp\server
-> node test
+> npm run dev
 ```
 
-In Mac and Linux:
+On Mac and Linux:
 ```Bash
 $ cd .\angularApp\server
-$ node run test:nix
+$ npm run dev:nix
 ```
 
 The node server will be running at http://localhost:3000/.
@@ -75,19 +89,19 @@ The node server will be running at http://localhost:3000/.
 The Angular app is built for production with Grunt:
 ```Powershell
 > cd .\angularApp\client
-> grunt serve
+> npm run build
 ```
 
 Test it with Node. In Windows:
 ```Powershell
 > cd .\angularApp\server
-> node start
+> npm start
 ```
 
-In Mac and Linux:
+On Mac and Linux:
 ```Bash
 $ cd .\angularApp\server
-$ node run start:nix
+$ npm run start:nix
 ```
 
 The node server will be running at http://localhost:3000/.
