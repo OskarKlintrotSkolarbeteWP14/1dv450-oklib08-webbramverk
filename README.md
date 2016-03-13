@@ -1,5 +1,97 @@
 # 1dv450-webbramverk
 
+## Assignment 3
+
+### Rails API (Vagrant)
+``` Powershell
+> git clone https://github.com/OskarKlintrotSkolarbeteWP14/1dv450-oklib08-webbramverk.git
+> cd 1dv450-oklib08-webbramverk
+> git checkout tags/v3.0-beta
+> vagrant plugin install vagrant-vbguest # Only if you use VBoxGuestAdditions
+> vagrant up
+> vagrant ssh # Make sure you have a ssh-client installed. If not, add
+              # C:\Program Files\Git\usr\bin to your path to use Git's
+```
+
+If there is an issue with mounting the shared folders, try updating the guests VBoxGuestAdditions:
+``` Bash
+$ sudo ln -s /opt/VBoxGuestAdditions-5.0.14/lib/VBoxGuestAdditions /usr/lib/VBoxGuestAdditions #5.0.14 should match the VBoxGuestAdditions on your host
+```
+
+SSH into the guest (the password is `vagrant`) and install the dependencies:
+``` Bash
+$ cd positioning_api
+$ bundle install
+```
+
+Setup the database:
+``` Bash
+$ rake db:setup
+```
+
+Start the server:
+``` Bash
+$ rails server -b 0.0.0.0 # Server runs at http://localhost:8080
+```
+
+### Angular-Node-Express App
+
+This app needs npm and Node to be installed and up to date.
+
+#### Setup
+
+Install the dependencies:
+```Powershell
+> cd .\angularApp\server
+> npm Install
+```
+
+#### Development
+
+Open two different terminals, one for Grunt and one for Node. Both will be running continuously.
+
+Serve the Angular app with Grunt:
+```Powershell
+> cd .\angularApp\client
+> grunt serve
+```
+
+Start the Node server hosting the Angular app that is being built with Grunt. In Windows:
+```Powershell
+> cd .\angularApp\server
+> node test
+```
+
+In Mac and Linux:
+```Bash
+$ cd .\angularApp\server
+$ node run test:nix
+```
+
+The node server will be running at http://localhost:3000/.
+
+### Production
+
+The Angular app is built for production with Grunt:
+```Powershell
+> cd .\angularApp\client
+> grunt serve
+```
+
+Test it with Node. In Windows:
+```Powershell
+> cd .\angularApp\server
+> node start
+```
+
+In Mac and Linux:
+```Bash
+$ cd .\angularApp\server
+$ node run start:nix
+```
+
+The node server will be running at http://localhost:3000/.
+
 ## Assignment 2
 
 ### Vagrant setup
