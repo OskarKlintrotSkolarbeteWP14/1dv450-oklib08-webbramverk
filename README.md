@@ -38,6 +38,15 @@ $ rails server -b 0.0.0.0 # Server runs at http://localhost:8080
 
 This app needs npm and Node to be installed and up to date.
 
+To just run the pre-built appliaction run the commands below, otherwise continue to [setup](#setup).
+```Powershell
+> cd .\angularApp\server
+> npm install
+> npm start
+```
+
+The node server will be running at http://localhost:3000/.
+
 #### Setup
 
 Install the dependencies for building the project:
