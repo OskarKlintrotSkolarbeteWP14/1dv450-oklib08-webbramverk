@@ -8,7 +8,7 @@
  * Controller of the clientApp
  */
 angular.module('clientApp')
-  .controller('MainCtrl', function () {
+  .controller('MainController', function () {
     this.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
