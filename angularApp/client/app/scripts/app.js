@@ -36,6 +36,10 @@ angular
         controller: 'LoginController',
         controllerAs: 'user'
       })
+      .when('/logout', {
+        template: ' ',
+        controller: 'LogoutController'
+      })
       .otherwise({
         redirectTo: '/'
       });

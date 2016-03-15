@@ -15,6 +15,12 @@
     <!-- build:css(.tmp) styles/main.css -->
     <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild -->
+    <style type="text/css">
+      [ng-cloak]
+        {
+          display: none !important;
+        }
+    </style>
   </head>
   <body ng-app="clientApp">
     <!--[if lte IE 8]>
@@ -42,7 +48,10 @@
             <ul class="nav navbar-nav">
               <li class="active"><a href="/">Home</a></li>
               <li><a ng-href="/about">About</a></li>
-              <li><a ng-href="/login">Login</a></li>
+              <!-- <li ng-cloak><a ng-href="/login">Login</a></li>
+              <li ng-cloak><a ng-href="/logout">Logout</a></li> -->
+              <li ng-cloak ng-hide="$root.isLoggedIn()"><a ng-href="/login">Login</a></li>
+              <li ng-cloak ng-show="$root.isLoggedIn()"><a ng-href="/logout">Logout</a></li>
             </ul>
           </div>
         </div>
@@ -95,6 +104,7 @@
         <script src="scripts/modules/main/mainController.js"></script>
         <script src="scripts/modules/about/aboutController.js"></script>
         <script src="scripts/modules/login/loginController.js"></script>
+        <script src="scripts/modules/logout/logoutController.js"></script>
         <!-- endbuild -->
 </body>
 </html>

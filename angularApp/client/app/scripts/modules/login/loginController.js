@@ -8,7 +8,7 @@
  * Controller of the clientApp
  */
 angular.module('clientApp')
-  .controller('LoginController', function ($http) {
+  .controller('LoginController', function ($http, $window, $rootScope) {
     var vm = this
 
     // I'm lazy...
@@ -36,10 +36,17 @@ angular.module('clientApp')
             isLoggedIn: true
           }
           sessionStorage[C.USER_INFO] = JSON.stringify(user)
+          $rootScope.isLoggedIn = function isLoggedIn() {
+            return JSON.parse(sessionStorage[C.USER_INFO]).isLoggedIn || false
+          }
+          $window.location = '/'
         })
         .error(function(data, status, headers, config) {
         data.error ? console.error(data.error) : console.error(data)
-        sessionStorage[C.USER_INFO] = false
+        sessionStorage.removeItem(C.USER_INFO)
+        $rootScope.isLoggedIn = function isLoggedIn() {
+          return JSON.parse(sessionStorage[C.USER_INFO]).isLoggedIn || false
+        }
       })
     }
   })
