@@ -17,7 +17,8 @@ angular
     'ngResource',
     'ngRoute',
     'ngSanitize',
-    'ngTouch'
+    'ngTouch',
+    'base64'
   ])
   .config(function ($routeProvider, $locationProvider) {
     $routeProvider
@@ -34,7 +35,7 @@ angular
       .when('/login', {
         templateUrl: 'views/login.html',
         controller: 'LoginController',
-        controllerAs: 'login'
+        controllerAs: 'user'
       })
       .otherwise({
         redirectTo: '/'
