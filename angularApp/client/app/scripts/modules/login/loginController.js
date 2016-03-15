@@ -17,7 +17,7 @@ angular.module('clientApp')
 
     vm.login = function() {
       var url = C.apiURL + 'auth'
-      var basicAuth = window.btoa(encodeURI(vm.email + ':' + vm.password))
+      var basicAuth = btoa(encodeURI(vm.email + ':' + vm.password))
       var config = {
         headers: {
             "X-ApiKey" : C.apiKey,
@@ -35,11 +35,11 @@ angular.module('clientApp')
             token: data.auth_token,
             isLoggedIn: true
           }
-          window.sessionStorage[C.USER_INFO] = JSON.stringify(user)
+          sessionStorage[C.USER_INFO] = JSON.stringify(user)
         })
         .error(function(data, status, headers, config) {
         data.error ? console.error(data.error) : console.error(data)
-        window.sessionStorage[C.USER_INFO] = false
+        sessionStorage[C.USER_INFO] = false
       })
     }
   })
