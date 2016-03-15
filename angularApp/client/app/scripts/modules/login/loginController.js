@@ -11,18 +11,18 @@ angular.module('clientApp')
   .controller('LoginController', function ($http) {
     var vm = this
 
+    // I'm lazy...
     vm.email = 'krakan@katt.nu'
     vm.password = 'hemligt'
 
-    console.log(vm)
-
     vm.login = function() {
-      var url = 'http://' + vm.email + ':' + vm.password + '@' + C.basicURL
-      console.log(url)
+      var url = C.apiURL + 'auth'
+      var basicAuth = window.btoa(encodeURI(vm.email + ':' + vm.password))
       var config = {
         headers: {
-            "X-APIkey" : C.apiKey,
-            "Accept" : "application/json"
+            "X-ApiKey" : C.apiKey,
+            "Accept" : "application/json",
+            "Authorization" : "Basic " + basicAuth
         }
       }
 
@@ -30,21 +30,16 @@ angular.module('clientApp')
 
       promise
         .success(function(data, status, headers, config) {
-          // Just check what we get back
-          console.log(data)
-          console.log(status)
-          console.log(config)
-
-          // if we succeeded we got a token - can be used to autenticate us
-          window.sessionStorage['token'] = data.auth_token
-          window.sessionStorage['isLoggedIn'] = true
+          var user = {
+            username: vm.email,
+            token: data.auth_token,
+            isLoggedIn: true
+          }
+          window.sessionStorage[C.USER_INFO] = JSON.stringify(user)
         })
         .error(function(data, status, headers, config) {
-        console.log(data)
-        console.log(status)
-        console.log(config)
-        window.sessionStorage['token'] = ''
-        window.sessionStorage['isLoggedIn'] = false
+        data.error ? console.error(data.error) : console.error(data)
+        window.sessionStorage[C.USER_INFO] = false
       })
     }
   })

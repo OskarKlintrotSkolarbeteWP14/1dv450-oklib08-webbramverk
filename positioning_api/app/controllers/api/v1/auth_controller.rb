@@ -14,6 +14,10 @@ class Api::V1::AuthController < Api::V1::BaseController
           }, status: :unauthorized
         end
       end
+    else
+      render json: {
+        error: 'Username and password is required'
+      }, status: :forbidden
     end
   end
 end
