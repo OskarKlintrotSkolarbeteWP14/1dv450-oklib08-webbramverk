@@ -3,13 +3,23 @@ class Api::V1::PositionsController < Api::V1::BaseController
   skip_before_action :api_authenticate, only: [:index, :show]
 
   def index
-    positions = Position.all.limit(@limit).offset(@offset)
-    render(
-      json: ActiveModel::ArraySerializer.new(
-        positions,
-        each_serializer: Api::V1::PositionSerializer
+    op_id = params[:op_id]
+
+    if !op_id.nil?
+      op = Op.find(op_id)
+      positions = op.position
+      render(json: Api::V1::PositionSerializer.new(positions))
+    else
+      positions = Position.all.limit(@limit).offset(@offset)
+      render(
+        json: ActiveModel::ArraySerializer.new(
+          positions,
+          each_serializer: Api::V1::PositionSerializer
+        )
       )
-    )
+    end
+
+
   end
 
   def create
