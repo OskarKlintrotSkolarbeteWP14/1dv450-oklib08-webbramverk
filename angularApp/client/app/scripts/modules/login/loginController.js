@@ -2,13 +2,13 @@
 
 /**
  * @ngdoc function
- * @name clientApp.controller:AboutCtrl
+ * @name clientApp.controller:LoginController
  * @description
- * # AboutCtrl
+ * # LoginController
  * Controller of the clientApp
  */
-angular.module('clientApp')
-  .controller('LoginController', function ($http, $window, $rootScope) {
+angular.module(C.appName)
+  .controller('LoginController', function ($http, $window, LoggedIn) {
     var vm = this
 
     // I'm lazy...
@@ -36,17 +36,17 @@ angular.module('clientApp')
             isLoggedIn: true
           }
           sessionStorage[C.USER_INFO] = JSON.stringify(user)
-          $rootScope.isLoggedIn = function isLoggedIn() {
-            return JSON.parse(sessionStorage[C.USER_INFO]).isLoggedIn || false
-          }
+          // LoggedIn.setLoggedInFromSession() // Redundant since this
+                                               // is also checked in
+                                               // the PageController
           $window.location = '/'
         })
         .error(function(data, status, headers, config) {
         data.error ? console.error(data.error) : console.error(data)
         sessionStorage.removeItem(C.USER_INFO)
-        $rootScope.isLoggedIn = function isLoggedIn() {
-          return JSON.parse(sessionStorage[C.USER_INFO]).isLoggedIn || false
-        }
+        // LoggedIn.setLoggedInFromSession() // Redundant since this
+                                             // is also checked in
+                                             // the PageController
       })
     }
   })

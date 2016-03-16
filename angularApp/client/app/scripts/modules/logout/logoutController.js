@@ -2,12 +2,12 @@
 
 /**
  * @ngdoc function
- * @name clientApp.controller:AboutCtrl
+ * @name clientApp.controller:LogoutController
  * @description
- * # AboutCtrl
+ * # LogoutController
  * Controller of the clientApp
  */
-angular.module('clientApp')
+angular.module(C.appName)
   .controller('LogoutController', function ($window, $rootScope) {
     sessionStorage.removeItem(C.USER_INFO)
     // $rootScope.isLoggedIn = false

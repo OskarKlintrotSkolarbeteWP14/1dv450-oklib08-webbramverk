@@ -9,7 +9,7 @@
  * Main module of the application.
  */
 angular
-  .module('clientApp', [
+  .module(C.appName, [
     'ngAnimate',
     'ngAria',
     'ngCookies',
@@ -22,16 +22,19 @@ angular
   .config(function ($routeProvider, $locationProvider) {
     $routeProvider
       .when('/', {
+        title: 'Home',
         templateUrl: 'views/main.html',
         controller: 'MainController',
         controllerAs: 'main'
       })
       .when('/about', {
+        title: 'About',
         templateUrl: 'views/about.html',
         controller: 'AboutController',
         controllerAs: 'about'
       })
       .when('/login', {
+        title: 'Login',
         templateUrl: 'views/login.html',
         controller: 'LoginController',
         controllerAs: 'user'

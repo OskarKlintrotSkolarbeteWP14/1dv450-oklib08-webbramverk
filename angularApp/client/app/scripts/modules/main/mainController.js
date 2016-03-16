@@ -1,4 +1,4 @@
-'use strict';
+'use strict'
 
 /**
  * @ngdoc function
@@ -7,10 +7,6 @@
  * # MainCtrl
  * Controller of the clientApp
  */
-angular.module('clientApp')
-  .controller('MainController', function ($rootScope) {
-    // A bit of an ugly hack...
-    $rootScope.isLoggedIn = function isLoggedIn() {
-      return JSON.parse(sessionStorage[C.USER_INFO]).isLoggedIn || false
-    }
-  });
+angular.module(C.appName)
+  .controller('MainController', function () {
+  })
