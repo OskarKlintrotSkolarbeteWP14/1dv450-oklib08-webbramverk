@@ -17,9 +17,10 @@ angular
     'ngResource',
     'ngRoute',
     'ngSanitize',
-    'ngTouch'
+    'ngTouch',
+    'uiGmapgoogle-maps'
   ])
-  .config(function ($routeProvider, $locationProvider) {
+  .config(function ($routeProvider, $locationProvider, uiGmapGoogleMapApiProvider) {
     $routeProvider
       .when('/', {
         title: 'Home',
@@ -49,4 +50,11 @@ angular
 
     $locationProvider
       .html5Mode(true);
+
+    uiGmapGoogleMapApiProvider
+      .configure({
+          //    key: 'your api key',
+          // v: '3.20', //defaults to latest 3.X anyhow
+          // libraries: 'weather,geometry,visualization'
+      })
   });
