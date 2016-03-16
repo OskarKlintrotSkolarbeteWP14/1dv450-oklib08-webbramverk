@@ -18,9 +18,10 @@ angular
     'ngRoute',
     'ngSanitize',
     'ngTouch',
-    'uiGmapgoogle-maps'
+    'uiGmapgoogle-maps',
+    'restangular'
   ])
-  .config(function ($routeProvider, $locationProvider, uiGmapGoogleMapApiProvider) {
+  .config(function ($routeProvider, $locationProvider, uiGmapGoogleMapApiProvider, RestangularProvider) {
     $routeProvider
       .when('/', {
         title: 'Home',
@@ -57,4 +58,7 @@ angular
           // v: '3.20', //defaults to latest 3.X anyhow
           // libraries: 'weather,geometry,visualization'
       })
+
+    RestangularProvider.setBaseUrl(C.apiURL)
+    RestangularProvider.setDefaultHeaders({ 'X-ApiKey': C.apiKey })
   });
