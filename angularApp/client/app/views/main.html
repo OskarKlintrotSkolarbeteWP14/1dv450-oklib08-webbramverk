@@ -8,7 +8,10 @@
 
 <div class="row marketing">
   <h1>Look ma, a photo op!</h1>
-  <ui-gmap-google-map center='map.center' zoom='map.zoom'></ui-gmap-google-map>
+  <ui-gmap-google-map center='map.center' zoom='map.zoom'>
+    <ui-gmap-markers models="markers" coords="'self'" icon="'icon'">
+    </ui-gmap-markers>
+  </ui-gmap-google-map>
   <h4>Save the op!</h4>
   <p>
     Did you see a great place to take an amazing photo but you did'nt have your camera with you? Or where the light terrible? Add a photo op so you don't forget it and add a time to it if you think there is a specific time when the light will be just amazing!

@@ -24,15 +24,46 @@ angular.module(C.appName)
         ops.forEach(function(op, index, array){
           promises.push(op.one('positions').get())
             if (promises.length === array.length) {
-              resolve(promises)
+              resolve({
+                ops: ops,
+                promises: promises
+              })
             }
         })
       })
     }
 
-    function mergePositionToOps(arrayOfPromises) {
-      return $q.all(arrayOfPromises)
+    function resolvePromisesForPositions(data) {
+      return $q(function(resolve){
+        $q.all(data.promises)
+          .then(function(positions){
+            resolve ({
+              ops: data.ops,
+              positions: _.uniqBy(positions, 'position.id')
+            })
+          })
+      })
     }
+
+    function mergeOpsWithPosition(data) {
+      var ops = []
+      data.ops.forEach(function(op){
+        data.positions.forEach(function(pos){
+          if(pos.position.id === op.position.id){
+            ops.push(
+              _.assign(
+                {}, op, {
+                  position: _.assign({}, op.position, pos.position)
+                }
+              )
+            )
+          }
+        })
+      })
+      return ops
+    }
+
+    $scope.markers = []
 
     var promise = Restangular
       .all('ops')
@@ -40,11 +71,23 @@ angular.module(C.appName)
       .then(function(ops){
         return getPositionsForOps(ops)
       })
-      .then(function(arrayOfPromises){
-        return mergePositionToOps(arrayOfPromises)
+      .then(function(data){
+        return resolvePromisesForPositions(data)
+      })
+      .then(function(data){
+        return mergeOpsWithPosition(data)
       })
       .then(function(data){
         console.log(data)
+        $scope.markers = data.map(function(marker){
+          return ({
+            id: marker.id,
+            latitude: marker.position.lat,
+            longitude: marker.position.lng,
+            title: marker.item
+          })
+        })
+        console.log($scope.markers)
       })
 
     // var promise = $q(function(resolve){
@@ -52,8 +95,7 @@ angular.module(C.appName)
     //   Restangular.all('ops').getList().then(function(ops){
     //     ops.forEach(function(op, index, array){
     //       op.one('positions').get().then(function(pos){
-    //         op.position = pos
-    //         markers.push(op.position)
+    //         markers.push(_.assign({}, op, pos))
     //         if (markers.length === array.length) {
     //           resolve(markers)
     //         }
@@ -61,8 +103,7 @@ angular.module(C.appName)
     //     })
     //   })
     // })
-    //
-    // promise.then(function(data){
+    // .then(function(data){
     //   console.log(data)
     // })
 
