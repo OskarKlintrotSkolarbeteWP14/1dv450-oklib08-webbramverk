@@ -46,10 +46,10 @@
 
           <div id="menu" class="collapse navbar-collapse" id="js-navbar-collapse" ng-switch on="LoggedIn.isLoggedIn()">
             <div ng-switch-when="true">
-              <ng-include src="'views/partials/loggedInMenu.html'"></ng-include>
+              <ng-include src="'views/partials/shared/loggedInMenu.html'"></ng-include>
             </div>
             <div ng-switch-when="false">
-              <ng-include src="'views/partials/loggedOutMenu.html'"></ng-include>
+              <ng-include src="'views/partials/shared/loggedOutMenu.html'"></ng-include>
             </div>
           </div>
         </div>
@@ -111,6 +111,7 @@
         <script src="scripts/modules/logout/logoutController.js"></script>
         <script src="scripts/modules/page/pageController.js"></script>
         <script src="scripts/factory/loggedInFactory.js"></script>
+        <script src="scripts/directives/tags.js"></script>
         <!-- endbuild -->
 </body>
 </html>

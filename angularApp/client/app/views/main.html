@@ -10,6 +10,7 @@
   <h1>Look ma, a photo op!</h1>
   <ui-gmap-google-map center='map.center' zoom='map.zoom'>
     <ui-gmap-markers models="markers" coords="'self'" icon="'icon'">
+      <ui-gmap-windows templateUrl="'template'" templateParameter="'info'" show="'showWindow'" closeClick="'closeClick'" ng-cloak></ui-gmap-windows>
     </ui-gmap-markers>
   </ui-gmap-google-map>
   <h4>Save the op!</h4>

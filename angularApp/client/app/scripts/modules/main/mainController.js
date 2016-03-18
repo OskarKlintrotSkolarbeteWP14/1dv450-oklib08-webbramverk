@@ -67,11 +67,24 @@ angular.module(C.appName)
 
     function createMarkers(data) {
       $scope.markers = data.map(function(marker){
+        // var tags = marker.tags.map(function(tag){
+        //   return {
+        //     tag: tag
+        //   }
+        // })
+        // console.log(typeof marker.tags)
         return ({
           id: marker.id,
           latitude: marker.position.lat,
           longitude: marker.position.lng,
-          title: marker.item
+          info: {
+            title: marker.item,
+            description: marker.note,
+            place: marker.position.place,
+            tags: marker.tags
+            // tags: JSON.stringify(marker.tags)
+          },
+          template: "views/partials/main/gmapWindow.html"
         })
       })
     }
