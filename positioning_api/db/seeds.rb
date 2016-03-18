@@ -31,15 +31,15 @@ u5 = User.create(username: 'Baggen', email: 'baggen@far.se',
                  first_name: 'Krakan', last_name: 'Får',
                  password: 'hemligt', password_confirmation: 'hemligt')
 
-p1 = Position.create(lng: '57.002757', lat: '14.573297',
+p1 = Position.create(lat: '57.002757', lng: '14.573297',
                      place: 'Moheda', region: 'Kronobergs län',
                      country: 'Sweden', user_id: u1.id)
 
-p2 = Position.create(lng: '56.879004', lat: '14.805852',
+p2 = Position.create(lat: '56.879004', lng: '14.805852',
                      place: 'Växjö', region: 'Kronobergs län',
                      country: 'Sweden', user_id: u1.id)
 
-p3 = Position.create(lng: '56.663445', lat: '16.356779',
+p3 = Position.create(lat: '56.663445', lng: '16.356779',
                      place: 'Kalmar', region: 'Kalmar län',
                      country: 'Sweden', user_id: u2.id)
 
