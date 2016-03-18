@@ -18,6 +18,8 @@ angular.module(C.appName)
       $scope.map = { center: { latitude: 63, longitude: 15 }, zoom: 4 }
     })
 
+    $scope.markers = []
+
     function getPositionsForOps(ops) {
       return $q(function(resolve){
         var promises = []
@@ -63,7 +65,16 @@ angular.module(C.appName)
       return ops
     }
 
-    $scope.markers = []
+    function createMarkers(data) {
+      $scope.markers = data.map(function(marker){
+        return ({
+          id: marker.id,
+          latitude: marker.position.lat,
+          longitude: marker.position.lng,
+          title: marker.item
+        })
+      })
+    }
 
     var promise = Restangular
       .all('ops')
@@ -78,16 +89,7 @@ angular.module(C.appName)
         return mergeOpsWithPosition(data)
       })
       .then(function(data){
-        console.log(data)
-        $scope.markers = data.map(function(marker){
-          return ({
-            id: marker.id,
-            latitude: marker.position.lat,
-            longitude: marker.position.lng,
-            title: marker.item
-          })
-        })
-        console.log($scope.markers)
+        createMarkers(data)
       })
 
     // var promise = $q(function(resolve){
