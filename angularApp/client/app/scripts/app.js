@@ -42,11 +42,11 @@ angular
         controller: 'LoginController',
         controllerAs: 'user'
       })
-      .when('/all', {
-        title: 'All',
-        templateUrl: 'views/all.html',
-        controller: 'AllController',
-        controllerAs: 'all'
+      .when('/search', {
+        title: 'Search',
+        templateUrl: 'views/search.html',
+        controller: 'SearchController',
+        controllerAs: 'search'
       })
       .when('/tags', {
         title: 'Tags',

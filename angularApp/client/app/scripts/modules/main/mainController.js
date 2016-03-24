@@ -11,7 +11,7 @@ angular.module(C.appName)
   .controller('MainController', function (
     $scope,
     uiGmapGoogleMapApi,
-    GetAll
+    Resources
   ) {
     uiGmapGoogleMapApi.then(function(maps) {
       $scope.map = { center: { latitude: 63, longitude: 15 }, zoom: 4 }
@@ -104,9 +104,15 @@ angular.module(C.appName)
     //     $rootScope.data = data
     //     createMarkers(data)
     //   })
-    GetAll().then(function(data){
-      createMarkers(data)
-    })
+    if(Resources.getCurrentData()){
+      console.log('Using filtered data')
+      createMarkers(Resources.getCurrentData())
+    } else {
+      console.log('Using all data')
+      Resources.getNewData().then(function(data){
+        createMarkers(data)
+      })
+    }
 
     // var promise = $q(function(resolve){
     //   var markers = []

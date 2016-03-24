@@ -1,4 +1,6 @@
-angular.module(C.appName).factory('GetAll', function($q, Restangular){
+angular.module(C.appName).factory('Resources', function($q, Restangular){
+  var self = this // Lovely old school ES5 hack!
+
   function getPositionsForOps(ops) {
     return $q(function(resolve){
       var promises = []
@@ -44,14 +46,15 @@ angular.module(C.appName).factory('GetAll', function($q, Restangular){
     return ops
   }
 
-  function getAll(resolve) {
-    if(!this.data){
+  function getAll(resolve, query) {
+    if(!self.data || query){
       console.log('Fetching new data')
       var promise = Restangular
         .all('ops')
-        .getList()
-        .then(function(ops){
-          return getPositionsForOps(ops)
+        .getList({search: query
+        })
+        .then(function(data){
+          return getPositionsForOps(data)
         })
         .then(function(data){
           return resolvePromisesForPositions(data)
@@ -60,18 +63,23 @@ angular.module(C.appName).factory('GetAll', function($q, Restangular){
           return mergeOpsWithPosition(data)
         })
         .then(function(data){
-          this.data = data
+          self.data = data
           resolve(data)
         })
     } else {
       console.log('Cached data')
-      resolve(this.data)
+      resolve(self.data)
     }
   }
 
-  return function() {
-    return $q(function(resolve){
-      getAll(resolve)
-    })
+  return {
+    getCurrentData: function() {
+      return self.data
+    },
+    getNewData: function(query) {
+      return $q(function(resolve){
+        getAll(resolve, query)
+      })
+    }
   }
 })

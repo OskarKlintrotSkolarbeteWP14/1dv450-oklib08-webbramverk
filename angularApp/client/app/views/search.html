@@ -1,0 +1,15 @@
+<form novalidate class="form-inline">
+  <div class="form-group">
+    <label for="search">Name</label>
+    <input ng-model="search.query" type="text" class="form-control" id="search" placeholder="Test">
+  </div>
+  <button ng-click="search.filter(search)" type="submit" class="btn btn-default">Search</button>
+</form>
+
+<table ng-table="search.tableParams" class="table table-condensed table-bordered table-striped">
+  <tr ng-repeat="row in $data">
+    <td data-title="'Name'" filter="{item: 'text'}">{{row.item}}</td>
+    <td data-title="'Note'" filter="{note: 'text'}">{{row.note}}</td>
+    <td data-title="'Place'" filter="{'position.place': 'text'}">{{row.position.place}}</td>
+  </tr>
+</table>
