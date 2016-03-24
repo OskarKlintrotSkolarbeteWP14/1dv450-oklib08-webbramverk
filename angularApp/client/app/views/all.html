@@ -1,0 +1,7 @@
+<table ng-table="all.tableParams" class="table table-condensed table-bordered table-striped">
+  <tr ng-repeat="row in $data">
+    <td data-title="'Name'" sortable="'item'">{{row.item}}</td>
+    <td data-title="'Note'" sortable="'note'">{{row.note}}</td>
+    <td data-title="'Place'" sortable="'place'">{{row.position.place}}</td>
+  </tr>
+</table>

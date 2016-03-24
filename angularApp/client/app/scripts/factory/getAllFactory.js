@@ -4,12 +4,12 @@ angular.module(C.appName).factory('GetAll', function($q, Restangular){
       var promises = []
       ops.forEach(function(op, index, array){
         promises.push(op.one('positions').get())
-          if (promises.length === array.length) {
-            resolve({
-              ops: ops,
-              promises: promises
-            })
-          }
+        if (promises.length === array.length) {
+          resolve({
+            ops: ops,
+            promises: promises
+          })
+        }
       })
     })
   }
