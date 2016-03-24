@@ -51,8 +51,7 @@ angular.module(C.appName).factory('Resources', function($q, Restangular){
       console.log('Fetching new data')
       var promise = Restangular
         .all('ops')
-        .getList({search: query
-        })
+        .getList({search: query})
         .then(function(data){
           return getPositionsForOps(data)
         })
