@@ -16,25 +16,27 @@ angular.module(C.appName)
   ) {
     var vm = this
 
-    vm.filter = function() {
+    function setTableParams(options) {
+      var options = options || { query: null, force: null },
+        query = options.query || null,
+        force = options.force || null
+
       vm.tableParams = new NgTableParams({}, {
         getData: function(params) {
-          return Resources.getNewData(vm.query).then(function(data) {
-            // console.log(data)
-            // params.total(data)
+          return Resources.getNewData(query, force).then(function(data) {
             return data
           })
         }
       })
     }
 
-    vm.tableParams = new NgTableParams({}, {
-      getData: function(params) {
-        return Resources.getNewData().then(function(data) {
-          // console.log(data)
-          // params.total(data)
-          return data
-        })
-      }
-    })
+    vm.filter = function() {
+      setTableParams({query: vm.query})
+    }
+
+    vm.clear = function() {
+      setTableParams({force: true})
+    }
+
+    setTableParams()
   })

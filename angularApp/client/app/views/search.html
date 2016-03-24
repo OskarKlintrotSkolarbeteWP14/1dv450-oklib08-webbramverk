@@ -1,9 +1,10 @@
 <form novalidate class="form-inline">
   <div class="form-group">
     <label for="search">Name</label>
-    <input ng-model="search.query" type="text" class="form-control" id="search" placeholder="Test">
+    <input ng-model="search.query" type="text" class="form-control" id="search" placeholder="Search by name...">
   </div>
   <button ng-click="search.filter(search)" type="submit" class="btn btn-default">Search</button>
+  <input ng-click="search.clear()" type="reset" value="Reset" class="btn btn-default" />
 </form>
 
 <table ng-table="search.tableParams" class="table table-condensed table-bordered table-striped">

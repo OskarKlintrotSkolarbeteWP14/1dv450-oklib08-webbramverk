@@ -46,8 +46,8 @@ angular.module(C.appName).factory('Resources', function($q, Restangular){
     return ops
   }
 
-  function getAll(resolve, query) {
-    if(!self.data || query){
+  function getAll(resolve, query, force) {
+    if(!self.data || query || force){
       console.log('Fetching new data')
       var promise = Restangular
         .all('ops')
@@ -75,9 +75,9 @@ angular.module(C.appName).factory('Resources', function($q, Restangular){
     getCurrentData: function() {
       return self.data
     },
-    getNewData: function(query) {
+    getNewData: function(query, force) {
       return $q(function(resolve){
-        getAll(resolve, query)
+        getAll(resolve, query, force)
       })
     }
   }
