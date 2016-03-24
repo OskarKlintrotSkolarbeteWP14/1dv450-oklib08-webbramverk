@@ -10,61 +10,60 @@
 angular.module(C.appName)
   .controller('MainController', function (
     $scope,
-    $q,
     uiGmapGoogleMapApi,
-    Restangular
+    GetAll
   ) {
     uiGmapGoogleMapApi.then(function(maps) {
       $scope.map = { center: { latitude: 63, longitude: 15 }, zoom: 4 }
     })
 
     $scope.markers = []
-
-    function getPositionsForOps(ops) {
-      return $q(function(resolve){
-        var promises = []
-        ops.forEach(function(op, index, array){
-          promises.push(op.one('positions').get())
-            if (promises.length === array.length) {
-              resolve({
-                ops: ops,
-                promises: promises
-              })
-            }
-        })
-      })
-    }
-
-    function resolvePromisesForPositions(data) {
-      return $q(function(resolve){
-        $q.all(data.promises)
-          .then(function(positions){
-            resolve ({
-              ops: data.ops,
-              positions: _.uniqBy(positions, 'position.id')
-            })
-          })
-      })
-    }
-
-    function mergeOpsWithPosition(data) {
-      var ops = []
-      data.ops.forEach(function(op){
-        data.positions.forEach(function(pos){
-          if(pos.position.id === op.position.id){
-            ops.push(
-              _.assign(
-                {}, op, {
-                  position: _.assign({}, op.position, pos.position)
-                }
-              )
-            )
-          }
-        })
-      })
-      return ops
-    }
-
+    //
+    // function getPositionsForOps(ops) {
+    //   return $q(function(resolve){
+    //     var promises = []
+    //     ops.forEach(function(op, index, array){
+    //       promises.push(op.one('positions').get())
+    //         if (promises.length === array.length) {
+    //           resolve({
+    //             ops: ops,
+    //             promises: promises
+    //           })
+    //         }
+    //     })
+    //   })
+    // }
+    //
+    // function resolvePromisesForPositions(data) {
+    //   return $q(function(resolve){
+    //     $q.all(data.promises)
+    //       .then(function(positions){
+    //         resolve ({
+    //           ops: data.ops,
+    //           positions: _.uniqBy(positions, 'position.id')
+    //         })
+    //       })
+    //   })
+    // }
+    //
+    // function mergeOpsWithPosition(data) {
+    //   var ops = []
+    //   data.ops.forEach(function(op){
+    //     data.positions.forEach(function(pos){
+    //       if(pos.position.id === op.position.id){
+    //         ops.push(
+    //           _.assign(
+    //             {}, op, {
+    //               position: _.assign({}, op.position, pos.position)
+    //             }
+    //           )
+    //         )
+    //       }
+    //     })
+    //   })
+    //   return ops
+    // }
+    //
     function createMarkers(data) {
       $scope.markers = data.map(function(marker){
         // var tags = marker.tags.map(function(tag){
@@ -88,22 +87,26 @@ angular.module(C.appName)
         })
       })
     }
-
-    var promise = Restangular
-      .all('ops')
-      .getList()
-      .then(function(ops){
-        return getPositionsForOps(ops)
-      })
-      .then(function(data){
-        return resolvePromisesForPositions(data)
-      })
-      .then(function(data){
-        return mergeOpsWithPosition(data)
-      })
-      .then(function(data){
-        createMarkers(data)
-      })
+    //
+    // var promise = Restangular
+    //   .all('ops')
+    //   .getList()
+    //   .then(function(ops){
+    //     return getPositionsForOps(ops)
+    //   })
+    //   .then(function(data){
+    //     return resolvePromisesForPositions(data)
+    //   })
+    //   .then(function(data){
+    //     return mergeOpsWithPosition(data)
+    //   })
+    //   .then(function(data){
+    //     $rootScope.data = data
+    //     createMarkers(data)
+    //   })
+    GetAll().then(function(data){
+      createMarkers(data)
+    })
 
     // var promise = $q(function(resolve){
     //   var markers = []

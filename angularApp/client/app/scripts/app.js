@@ -19,7 +19,8 @@ angular
     'ngSanitize',
     'ngTouch',
     'uiGmapgoogle-maps',
-    'restangular'
+    'restangular',
+    'ngTable'
   ])
   .config(function ($routeProvider, $locationProvider, uiGmapGoogleMapApiProvider, RestangularProvider) {
     $routeProvider
@@ -40,6 +41,24 @@ angular
         templateUrl: 'views/login.html',
         controller: 'LoginController',
         controllerAs: 'user'
+      })
+      .when('/all', {
+        title: 'All',
+        templateUrl: 'views/all.html',
+        controller: 'AllController',
+        controllerAs: 'all'
+      })
+      .when('/tags', {
+        title: 'Tags',
+        templateUrl: 'views/tags.html',
+        controller: 'TagsController',
+        controllerAs: 'tags'
+      })
+      .when('/admin', {
+        title: 'Admin',
+        templateUrl: 'views/admin.html',
+        controller: 'AdminController',
+        controllerAs: 'admin'
       })
       .when('/logout', {
         template: ' ',
