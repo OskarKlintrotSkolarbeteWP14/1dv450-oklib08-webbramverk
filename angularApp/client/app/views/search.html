@@ -9,8 +9,9 @@
 
 <table ng-table="search.tableParams" class="table table-condensed table-bordered table-striped">
   <tr ng-repeat="row in $data">
-    <td data-title="'Name'" filter="{item: 'text'}">{{row.item}}</td>
-    <td data-title="'Note'" filter="{note: 'text'}">{{row.note}}</td>
-    <td data-title="'Place'" filter="{'position.place': 'text'}">{{row.position.place}}</td>
+    <td data-title="'Name'">{{row.item}}</td>
+    <td data-title="'Note'">{{row.note}}</td>
+    <td data-title="'Place'">{{row.position.place}}</td>
+    <td data-title="'Tags'"><tags marker="row.tags" /></td>
   </tr>
 </table>
