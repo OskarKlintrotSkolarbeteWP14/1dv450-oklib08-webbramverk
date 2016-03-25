@@ -12,12 +12,13 @@ angular.module(C.appName)
     return {
       restrict: 'E',
       scope: {
-        marker: '='
+        marker: '=',
+        links: '='
       },
       // link: function($scope, element, attrs) {
       //   $scope.marker = JSON.parse($scope.marker)
       //   attrs.marker = JSON.parse(attrs.marker)
-      //   console.log($scope.marker, attrs.marker)
+        // console.log($scope.marker, attrs.marker)
       //   $scope.marker.forEach(function(item){
       //     console.log(item)
       //   })

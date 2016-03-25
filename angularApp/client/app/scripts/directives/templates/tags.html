@@ -1,1 +1,3 @@
-<span ng-repeat="obj in marker | orderBy: 'tag'"><span>{{obj.tag}}<span ng-if="!$last">, </span></span></span>
+<span ng-if="!links" ng-repeat="obj in marker | orderBy: 'tag'"><span>{{obj.tag}}<span ng-if="!$last">, </span></span></span>
+
+<span ng-if="links" ng-repeat="obj in marker | orderBy: 'tag'"><a href="tags?id={{obj.id}}">{{obj.tag}}<span ng-if="!$last">, </span></a></span>
