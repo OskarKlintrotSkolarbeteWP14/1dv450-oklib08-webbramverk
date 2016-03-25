@@ -9,10 +9,17 @@
  */
 angular.module(C.appName)
   .controller('TagsController', function (
-    OpsTable
+    OpsTable,
+    $routeParams,
+    $location
   ) {
     var vm = this
-    
+
+    console.log('$location.search():')
+    console.log($location.search().id)
+    console.log('$routeParams:')
+    console.log($routeParams.id)
+
     function setTableParams(options){
       vm.tableParams = OpsTable(options)
     }
