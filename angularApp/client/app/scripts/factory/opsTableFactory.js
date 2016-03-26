@@ -9,7 +9,7 @@ angular.module(C.appName).factory('OpsTable', function(
 
     return new NgTableParams({}, {
       getData: function(params) {
-        return Resources.getNewData(query, force).then(function(data) {
+        return Resources.getNewOps(query, force).then(function(data) {
           return data
         })
       }

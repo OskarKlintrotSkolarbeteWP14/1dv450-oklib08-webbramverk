@@ -18,60 +18,9 @@ angular.module(C.appName)
     })
 
     $scope.markers = []
-    //
-    // function getPositionsForOps(ops) {
-    //   return $q(function(resolve){
-    //     var promises = []
-    //     ops.forEach(function(op, index, array){
-    //       promises.push(op.one('positions').get())
-    //         if (promises.length === array.length) {
-    //           resolve({
-    //             ops: ops,
-    //             promises: promises
-    //           })
-    //         }
-    //     })
-    //   })
-    // }
-    //
-    // function resolvePromisesForPositions(data) {
-    //   return $q(function(resolve){
-    //     $q.all(data.promises)
-    //       .then(function(positions){
-    //         resolve ({
-    //           ops: data.ops,
-    //           positions: _.uniqBy(positions, 'position.id')
-    //         })
-    //       })
-    //   })
-    // }
-    //
-    // function mergeOpsWithPosition(data) {
-    //   var ops = []
-    //   data.ops.forEach(function(op){
-    //     data.positions.forEach(function(pos){
-    //       if(pos.position.id === op.position.id){
-    //         ops.push(
-    //           _.assign(
-    //             {}, op, {
-    //               position: _.assign({}, op.position, pos.position)
-    //             }
-    //           )
-    //         )
-    //       }
-    //     })
-    //   })
-    //   return ops
-    // }
-    //
+
     function createMarkers(data) {
       $scope.markers = data.map(function(marker){
-        // var tags = marker.tags.map(function(tag){
-        //   return {
-        //     tag: tag
-        //   }
-        // })
-        // console.log(typeof marker.tags)
         return ({
           id: marker.id,
           latitude: marker.position.lat,
@@ -81,35 +30,18 @@ angular.module(C.appName)
             description: marker.note,
             place: marker.position.place,
             tags: marker.tags
-            // tags: JSON.stringify(marker.tags)
           },
           template: "views/partials/main/gmapWindow.html"
         })
       })
     }
-    //
-    // var promise = Restangular
-    //   .all('ops')
-    //   .getList()
-    //   .then(function(ops){
-    //     return getPositionsForOps(ops)
-    //   })
-    //   .then(function(data){
-    //     return resolvePromisesForPositions(data)
-    //   })
-    //   .then(function(data){
-    //     return mergeOpsWithPosition(data)
-    //   })
-    //   .then(function(data){
-    //     $rootScope.data = data
-    //     createMarkers(data)
-    //   })
-    if(Resources.getCurrentData()){
+
+    if(Resources.getCurrentOps()){
       console.log('Using filtered data')
-      createMarkers(Resources.getCurrentData())
+      createMarkers(Resources.getCurrentOps())
     } else {
       console.log('Using all data')
-      Resources.getNewData().then(function(data){
+      Resources.getNewOps().then(function(data){
         createMarkers(data)
       })
     }
