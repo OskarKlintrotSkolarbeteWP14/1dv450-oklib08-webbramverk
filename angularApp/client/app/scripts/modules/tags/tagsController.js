@@ -11,14 +11,19 @@ angular.module(C.appName)
   .controller('TagsController', function (
     OpsTable,
     $routeParams,
-    $location
+    Resources
   ) {
     var vm = this
 
-    console.log('$location.search():')
-    console.log($location.search().id)
-    console.log('$routeParams:')
-    console.log($routeParams.id)
+    Resources.getAllTags().then(function(data){
+      vm.tags = data
+    })
+
+    if ($routeParams.id) {
+      setTableParams({url: 'tags/' + $routeParams.id + '/ops', force: true})
+    } else {
+      setTableParams({force: true})
+    }
 
     function setTableParams(options){
       vm.tableParams = OpsTable(options)
@@ -31,6 +36,4 @@ angular.module(C.appName)
     // vm.clear = function() {
     //   setTableParams({force: true})
     // }
-
-    setTableParams()
   })

@@ -5,7 +5,7 @@ angular.module(C.appName).factory('PositionsResources', function($q, Restangular
     return $q(function(resolve){
       var promises = []
       ops.forEach(function(op, index, array){
-        promises.push(op.one('positions').get())
+        promises.push(op.oneUrl('/', C.baseURL + op.position.url.slice(1)).get())
         if (promises.length === array.length) {
           resolve({
             ops: ops,
@@ -46,19 +46,22 @@ angular.module(C.appName).factory('PositionsResources', function($q, Restangular
     return ops
   }
 
-  function getAll(resolve, query, force) {
+  function getAll(resolve, url, query, force) {
     if(!self.data || query || force){
       console.log('Fetching new data')
       var promise = Restangular
-        .all('ops')
+        .all(url)
         .getList({search: query})
         .then(function(data){
+          console.log(1);
           return getPositionsForOps(data)
         })
         .then(function(data){
+          console.log(2);
           return resolvePromisesForPositions(data)
         })
         .then(function(data){
+          console.log(3);
           return mergeOpsWithPosition(data)
         })
         .then(function(data){
@@ -75,9 +78,14 @@ angular.module(C.appName).factory('PositionsResources', function($q, Restangular
     getCurrentData: function() {
       return self.data
     },
-    getNewData: function(query, force) {
+    getNewData: function(options) {
+      var options = options || {},
+        query = options.query || null,
+        force = options.force || null,
+        url = options.url || 'ops'
+
       return $q(function(resolve){
-        getAll(resolve, query, force)
+        getAll(resolve, url, query, force)
       })
     }
   }

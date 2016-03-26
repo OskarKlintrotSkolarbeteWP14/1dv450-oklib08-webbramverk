@@ -41,7 +41,7 @@ angular.module(C.appName)
       createMarkers(Resources.getCurrentOps())
     } else {
       console.log('Using all data')
-      Resources.getNewOps().then(function(data){
+      Resources.getNewOps('ops').then(function(data){
         createMarkers(data)
       })
     }

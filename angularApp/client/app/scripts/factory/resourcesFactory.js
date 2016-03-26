@@ -1,12 +1,16 @@
 angular.module(C.appName).factory('Resources', function(
-  PositionsResources
+  PositionsResources,
+  TagsResources
 ){
   return {
     getCurrentOps: function() {
       return PositionsResources.getCurrentData()
     },
-    getNewOps: function(query, force) {
-      return PositionsResources.getNewData(query, force)
+    getNewOps: function(options) {
+      return PositionsResources.getNewData(options)
+    },
+    getAllTags: function() {
+      return TagsResources.getNewData()
     }
   }
 })
