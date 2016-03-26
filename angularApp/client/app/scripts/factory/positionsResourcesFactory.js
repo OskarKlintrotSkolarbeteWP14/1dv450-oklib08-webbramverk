@@ -53,15 +53,12 @@ angular.module(C.appName).factory('PositionsResources', function($q, Restangular
         .all(url)
         .getList({search: query})
         .then(function(data){
-          console.log(1);
           return getPositionsForOps(data)
         })
         .then(function(data){
-          console.log(2);
           return resolvePromisesForPositions(data)
         })
         .then(function(data){
-          console.log(3);
           return mergeOpsWithPosition(data)
         })
         .then(function(data){
