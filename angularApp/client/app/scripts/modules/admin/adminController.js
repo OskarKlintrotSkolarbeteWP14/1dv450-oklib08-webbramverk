@@ -19,6 +19,7 @@ angular.module(C.appName)
 
     vm.loggedIn = LoggedIn.isLoggedIn()
     vm.username = LoggedIn.getUsername()
+    vm.edit = $routeParams.edit || false
 
     function setTableParams(){
       vm.tableParams = OpsTable({currentUser: userID, force: true})

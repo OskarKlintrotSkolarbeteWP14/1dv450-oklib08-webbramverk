@@ -4,5 +4,6 @@
     <td data-title="'Note'">{{row.note}}</td>
     <td data-title="'Place'">{{row.position.place}}</td>
     <td data-title="'Tags'"><tags links="true" marker="row.tags" /></td>
+    <td ng-if="editable" data-title="'Edit'"><a data-ng-href="/admin?edit={{row.id}}">Edit</a></td>
   </tr>
 </table>

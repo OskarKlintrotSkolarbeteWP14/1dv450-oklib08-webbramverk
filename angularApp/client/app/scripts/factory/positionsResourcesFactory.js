@@ -56,9 +56,9 @@ angular.module(C.appName).factory('PositionsResources', function($q, Restangular
   }
 
   function getAll(resolve, currentUser, url, query, force) {
-    console.log(self.lastSearchByUser)
-    console.log(currentUser)
-    console.log(self.lastSearchByUser && !currentUser)
+    // console.log(self.lastSearchByUser)
+    // console.log(currentUser)
+    // console.log(self.lastSearchByUser && !currentUser)
     if(!self.data || query || force || self.lastSearchByUser && !currentUser){
       console.log('Fetching new data')
       var promise = Restangular

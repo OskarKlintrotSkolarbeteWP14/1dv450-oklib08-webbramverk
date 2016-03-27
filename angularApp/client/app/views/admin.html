@@ -3,7 +3,7 @@
   <p>
     Logged in<span ng-if="admin.username"> as <strong>{{admin.username}}</strong></span>
   </p>
-  <opstable ops="admin.tableParams" />
+  <opstable ng-if="!admin.edit" ops="admin.tableParams" editable="true" />
 </div>
 <div ng-if="!admin.loggedIn">
   <p>
