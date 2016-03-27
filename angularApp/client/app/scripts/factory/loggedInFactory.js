@@ -38,6 +38,17 @@ angular.module(C.appName).factory('LoggedIn', function(){
       } catch (e) {
         return null
       }
+    },
+    getToken: function() {
+      try {
+        if (JSON.parse(sessionStorage[C.USER_INFO]).token) {
+          return JSON.parse(sessionStorage[C.USER_INFO]).token
+        } else {
+          return null
+        }
+      } catch (e) {
+        return null
+      }
     }
   }
 })

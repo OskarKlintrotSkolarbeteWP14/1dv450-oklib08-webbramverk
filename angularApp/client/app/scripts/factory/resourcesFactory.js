@@ -2,7 +2,8 @@
 
 angular.module(C.appName).factory('Resources', function(
   PositionsResources,
-  TagsResources
+  TagsResources,
+  SaveResources
 ){
   return {
     getCurrentOps: function() {
@@ -13,6 +14,9 @@ angular.module(C.appName).factory('Resources', function(
     },
     getAllTags: function() {
       return TagsResources.getNewData()
+    },
+    save: function(op) {
+      return SaveResources.save(op)
     }
   }
 })

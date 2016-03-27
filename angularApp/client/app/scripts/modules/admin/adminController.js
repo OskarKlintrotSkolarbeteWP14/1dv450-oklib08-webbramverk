@@ -12,7 +12,8 @@ angular.module(C.appName)
     LoggedIn,
     OpsTable,
     $routeParams,
-    Resources
+    Resources,
+    $window
   ) {
     var vm = this
     var userID = LoggedIn.getUserID()
@@ -22,6 +23,55 @@ angular.module(C.appName)
     vm.edit = $routeParams.edit || false
 
     if (vm.edit) {
+      getOneOp()
+    }
+
+    vm.update = function() {
+      Resources.save({
+        op: {
+          id: vm.op.id,
+          position_id: vm.op.position.id,
+          item: vm.op.item,
+          note: vm.op.note,
+          tags: typeof vm.tags === String ? vm.tags.split(',') : vm.tags
+        },
+        position: {
+          id: vm.position.id,
+          lat: vm.position.lat,
+          lng: vm.position.lng,
+          place: vm.position.place,
+          region: vm.position.region,
+          country: vm.position.country
+        }
+      })
+        .then(function(data) {
+          $window.location = '/admin'
+        })
+    }
+
+    vm.delete = function() {
+      console.log('Delete!');
+    }
+
+    vm.reset = function() {
+      getOneOp()
+    }
+
+    vm.cancel = function() {
+      $window.location = '/admin'
+    }
+
+    setTableParams()
+
+    function setTableParams(){
+      vm.tableParams = OpsTable({currentUser: userID, force: true})
+    }
+
+    function getOneOp() {
+      vm.op = null
+      vm.tags = null
+      vm.position = null
+
       Resources.getNewOps({opsID: vm.edit}).then(function(data){
         vm.op = data
         vm.position = data.position
@@ -32,25 +82,4 @@ angular.module(C.appName)
       })
     }
 
-    // Example for an object to update an ops
-    var exempleOps = {
-      position_id: 1,
-      item: 'Vinfölje',
-      note: 'Blir nog ett bra kort i solnedgång',
-      tags: ['Badring', 'Skog']
-    }
-    // Example for updating a position
-    var examplePos = {
-      lng: 57.002750,
-      lat: 14.573293,
-      place: 'Hjortsberga',
-      region: 'Kronobergs Län',
-      country: 'Sweden'
-    }
-
-    function setTableParams(){
-      vm.tableParams = OpsTable({currentUser: userID, force: true})
-    }
-
-    setTableParams()
   })

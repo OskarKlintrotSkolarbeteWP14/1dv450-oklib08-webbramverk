@@ -5,7 +5,7 @@
   </p>
   <div ng-if="admin.edit">
     <h2>Update ops</h2>
-    <form novalidate class="form-inline">
+    <form novalidate>
       <div class="form-group">
         <label for="name">Name</label>
         <input ng-model="admin.op.item" type="text" class="form-control" id="name">
@@ -18,12 +18,6 @@
         <label for="tags">Tags</label>
         <input ng-model="admin.tags" type="text" class="form-control" id="tags">
       </div>
-      <button ng-click="admin.update()" type="submit" class="btn btn-default">Update</button>
-      <input ng-click="admin.clear()" type="delete" value="Remove" class="btn btn-default" />
-      <input ng-click="admin.clear()" type="reset" value="Reset" class="btn btn-default" />
-    </form>
-    <h2>Update position</h2>
-    <form novalidate class="form-inline">
       <div class="form-group">
         <label for="lng">Longitude</label>
         <input ng-model="admin.position.lng" type="text" class="form-control" id="lng">
@@ -45,7 +39,9 @@
         <input ng-model="admin.position.country" type="text" class="form-control" id="country">
       </div>
       <button ng-click="admin.update()" type="submit" class="btn btn-default">Update</button>
-      <input ng-click="admin.clear()" type="reset" value="Reset" class="btn btn-default" />
+      <input ng-click="admin.delete()" type="delete" value="Remove" class="btn btn-default" />
+      <input ng-click="admin.reset()" type="reset" value="Reset" class="btn btn-default" />
+      <input ng-click="admin.cancel()" type="cancel" value="Cancel" class="btn btn-default" />
     </form>
   </div>
   <opstable ng-if="!admin.edit" ops="admin.tableParams" editable="true" />
