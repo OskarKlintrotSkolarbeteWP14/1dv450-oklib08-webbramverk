@@ -3,6 +3,29 @@
   <p>
     Logged in<span ng-if="admin.username"> as <strong>{{admin.username}}</strong></span>
   </p>
+  <div ng-if="admin.edit">
+    <form novalidate class="form-inline">
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input ng-model="admin.op.item" type="text" class="form-control" id="name">
+      </div>
+      <div class="form-group">
+        <label for="note">Note</label>
+        <input ng-model="admin.op.note" type="text" class="form-control" id="note">
+      </div>
+      <div class="form-group">
+        <label for="place">Place</label>
+        <input ng-model="admin.op.position.place" type="text" class="form-control" id="place">
+      </div>
+      <div class="form-group">
+        <label for="tags">Tags</label>
+        <input ng-model="admin.tags" type="text" class="form-control" id="tags">
+      </div>
+      <button ng-click="admin.filter(search)" type="submit" class="btn btn-default">Update</button>
+      <input ng-click="admin.clear()" type="delete" value="Remove" class="btn btn-default" />
+      <input ng-click="admin.clear()" type="reset" value="Reset" class="btn btn-default" />
+    </form>
+  </div>
   <opstable ng-if="!admin.edit" ops="admin.tableParams" editable="true" />
 </div>
 <div ng-if="!admin.loggedIn">

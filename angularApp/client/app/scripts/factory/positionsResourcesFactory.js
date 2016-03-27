@@ -13,15 +13,25 @@ angular.module(C.appName).factory('PositionsResources', function($q, Restangular
   function getPositionsForOps(ops) {
     return $q(function(resolve){
       var promises = []
-      ops.forEach(function(op, index, array){
-        promises.push(op.oneUrl('/', C.baseURL + op.position.url.slice(1)).get())
-        if (promises.length === array.length) {
-          resolve({
-            ops: ops,
-            promises: promises
-          })
-        }
-      })
+      if(ops.length){
+        ops.forEach(function(op, index, array){
+          promises.push(op.oneUrl('/', C.baseURL + op.position.url.slice(1)).get())
+          if (promises.length === array.length) {
+            resolve({
+              ops: ops,
+              promises: promises
+            })
+          }
+        })
+      } else {
+        // console.log(ops);
+        var op = ops.op
+        promises.push(ops.oneUrl('/', C.baseURL + op.position.url.slice(1)).get())
+        resolve({
+          ops: ops,
+          promises: promises
+        })
+      }
     })
   }
 
@@ -55,23 +65,40 @@ angular.module(C.appName).factory('PositionsResources', function($q, Restangular
     return ops
   }
 
-  function getAll(resolve, currentUser, url, query, force) {
+  function mergeOpWithPosition(data) {
+    return _.assign(
+      {}, data.ops.op, {
+        position: _.assign({}, data.ops.op.position, data.positions[0].position)
+      }
+    )
+  }
+
+  function getAll(resolve, currentUser, opsID, url, query, force) {
     // console.log(self.lastSearchByUser)
     // console.log(currentUser)
     // console.log(self.lastSearchByUser && !currentUser)
-    if(!self.data || query || force || self.lastSearchByUser && !currentUser){
+    if(!self.data || opsID || query || force || self.lastSearchByUser && !currentUser){
       console.log('Fetching new data')
       var promise = Restangular
-        .all(url)
+      if(opsID){
+        promise = promise.one(url, opsID)
+          .get()
+      } else {
+        promise = promise.all(url)
         .getList({search: query})
-        .then(function(data){
+      }
+        promise.then(function(data){
           return getPositionsForOps(data)
         })
         .then(function(data){
           return resolvePromisesForPositions(data)
         })
         .then(function(data){
-          return mergeOpsWithPosition(data)
+          if (opsID) {
+            return mergeOpWithPosition(data)
+          } else {
+            return mergeOpsWithPosition(data)
+          }
         })
         .then(function(data){
           if(currentUser) {
@@ -97,6 +124,7 @@ angular.module(C.appName).factory('PositionsResources', function($q, Restangular
       var options = options || {},
         query = options.query || null,
         force = options.force || null,
+        opsID = options.opsID || null,
         url = options.url || 'ops',
         currentUser = options.currentUser || null
         if(currentUser){
@@ -104,7 +132,7 @@ angular.module(C.appName).factory('PositionsResources', function($q, Restangular
         }
 
       return $q(function(resolve){
-        getAll(resolve, currentUser, url, query, force)
+        getAll(resolve, currentUser, opsID, url, query, force)
       })
     }
   }
