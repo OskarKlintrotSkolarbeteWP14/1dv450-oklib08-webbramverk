@@ -1,3 +1,5 @@
+'use strict'
+
 angular.module(C.appName).factory('OpsTable', function(
   Resources,
   NgTableParams

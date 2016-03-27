@@ -32,6 +32,7 @@ angular.module(C.appName)
         .success(function(data, status, headers, config) {
           var user = {
             username: vm.email,
+            userID: data.user_id,
             token: data.auth_token,
             isLoggedIn: true
           }
@@ -39,7 +40,7 @@ angular.module(C.appName)
           // LoggedIn.setLoggedInFromSession() // Redundant since this
                                                // is also checked in
                                                // the PageController
-          $window.location = '/'
+          $window.location = '/admin'
         })
         .error(function(data, status, headers, config) {
         data.error ? console.error(data.error) : console.error(data)

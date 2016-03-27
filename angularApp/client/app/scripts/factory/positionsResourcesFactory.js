@@ -1,5 +1,14 @@
+'use strict'
+
 angular.module(C.appName).factory('PositionsResources', function($q, Restangular){
   var self = this // Lovely old school ES5 hack!
+  self.lastSearchByUser = false
+
+  // Could be used to achive some simple caching
+  // self.opsForCurrentUser = null
+  // self.opsByTags = null
+  // self.opsBySearch = null
+  // self.allOps = null
 
   function getPositionsForOps(ops) {
     return $q(function(resolve){
@@ -46,8 +55,11 @@ angular.module(C.appName).factory('PositionsResources', function($q, Restangular
     return ops
   }
 
-  function getAll(resolve, url, query, force) {
-    if(!self.data || query || force){
+  function getAll(resolve, currentUser, url, query, force) {
+    console.log(self.lastSearchByUser)
+    console.log(currentUser)
+    console.log(self.lastSearchByUser && !currentUser)
+    if(!self.data || query || force || self.lastSearchByUser && !currentUser){
       console.log('Fetching new data')
       var promise = Restangular
         .all(url)
@@ -62,6 +74,12 @@ angular.module(C.appName).factory('PositionsResources', function($q, Restangular
           return mergeOpsWithPosition(data)
         })
         .then(function(data){
+          if(currentUser) {
+            self.lastSearchByUser = true
+            // self.opsForCurrentUser = data
+          } else {
+            self.lastSearchByUser = false
+          }
           self.data = data
           resolve(data)
         })
@@ -79,10 +97,14 @@ angular.module(C.appName).factory('PositionsResources', function($q, Restangular
       var options = options || {},
         query = options.query || null,
         force = options.force || null,
-        url = options.url || 'ops'
+        url = options.url || 'ops',
+        currentUser = options.currentUser || null
+        if(currentUser){
+          url = 'users/' + currentUser + '/ops'
+        }
 
       return $q(function(resolve){
-        getAll(resolve, url, query, force)
+        getAll(resolve, currentUser, url, query, force)
       })
     }
   }

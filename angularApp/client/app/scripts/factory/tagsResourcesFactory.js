@@ -1,3 +1,5 @@
+'use strict'
+
 angular.module(C.appName).factory('TagsResources', function($q, Restangular){
   var self = this // Lovely old school ES5 hack!
 

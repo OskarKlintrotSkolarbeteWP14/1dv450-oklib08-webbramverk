@@ -1,3 +1,5 @@
+'use strict'
+
 angular.module(C.appName).factory('Resources', function(
   PositionsResources,
   TagsResources

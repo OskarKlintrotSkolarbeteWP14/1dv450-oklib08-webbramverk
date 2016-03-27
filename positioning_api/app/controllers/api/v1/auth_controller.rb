@@ -7,7 +7,8 @@ class Api::V1::AuthController < Api::V1::BaseController
       authenticate_with_http_basic do |u, p|
         user = User.find_by_email(u)
         if user.authenticate(p)
-          render json: { auth_token: encodeJWT(user) }
+          render json: { auth_token: encodeJWT(user),
+                         user_id: user.id }
         else
           render json: {
             error: 'Invalid username or password'

@@ -8,45 +8,21 @@
  * Controller of the clientApp
  */
 angular.module(C.appName)
-  .controller('AdminController', function ($http, $window, LoggedIn) {
+  .controller('AdminController', function (
+    LoggedIn,
+    OpsTable,
+    $routeParams,
+    Resources
+  ) {
     var vm = this
+    var userID = LoggedIn.getUserID()
 
-    // I'm lazy...
-    vm.email = 'krakan@katt.nu'
-    vm.password = 'hemligt'
+    vm.loggedIn = LoggedIn.isLoggedIn()
+    vm.username = LoggedIn.getUsername()
 
-    vm.login = function() {
-      var url = C.apiURL + 'auth'
-      var basicAuth = btoa(encodeURI(vm.email + ':' + vm.password))
-      var config = {
-        headers: {
-            "X-ApiKey" : C.apiKey,
-            "Accept" : "application/json",
-            "Authorization" : "Basic " + basicAuth
-        }
-      }
-
-      var promise = $http.post(url, null, config)
-
-      promise
-        .success(function(data, status, headers, config) {
-          var user = {
-            username: vm.email,
-            token: data.auth_token,
-            isLoggedIn: true
-          }
-          sessionStorage[C.USER_INFO] = JSON.stringify(user)
-          // LoggedIn.setLoggedInFromSession() // Redundant since this
-                                               // is also checked in
-                                               // the PageController
-          $window.location = '/'
-        })
-        .error(function(data, status, headers, config) {
-        data.error ? console.error(data.error) : console.error(data)
-        sessionStorage.removeItem(C.USER_INFO)
-        // LoggedIn.setLoggedInFromSession() // Redundant since this
-                                             // is also checked in
-                                             // the PageController
-      })
+    function setTableParams(){
+      vm.tableParams = OpsTable({currentUser: userID, force: true})
     }
+
+    setTableParams()
   })
