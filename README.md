@@ -42,7 +42,7 @@ To just run the pre-built appliaction run the commands below, otherwise continue
 ```Powershell
 > cd .\angularApp\server
 > npm install
-> npm start
+> npm run dev
 ```
 
 The node server will be running at http://localhost:3000/.
@@ -114,6 +114,10 @@ $ npm run start:nix
 ```
 
 The node server will be running at http://localhost:3000/.
+
+### Changes in the API
+
+The biggest changes in the API where to open up more routes to resources to be able to fetch position for each ops by using `/ops/:id/positions/`. I also had to enable CORS.
 
 ## Assignment 2
 
