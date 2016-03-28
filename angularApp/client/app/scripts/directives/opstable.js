@@ -13,6 +13,7 @@ angular.module(C.appName)
       restrict: 'E',
       scope: {
         ops: '=',
+        remove: '=',
         editable: '='
       },
       templateUrl: 'scripts/directives/templates/ops.html'

@@ -2,6 +2,7 @@
 class Tag < ActiveRecord::Base
   belongs_to :user
   has_and_belongs_to_many :ops
+  before_save { self.tag = tag.capitalize }
 
   validates :user_id,
             presence: true

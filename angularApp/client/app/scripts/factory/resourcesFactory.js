@@ -3,7 +3,8 @@
 angular.module(C.appName).factory('Resources', function(
   PositionsResources,
   TagsResources,
-  SaveResources
+  SaveResources,
+  RemoveResources
 ){
   return {
     getCurrentOps: function() {
@@ -17,6 +18,9 @@ angular.module(C.appName).factory('Resources', function(
     },
     save: function(op) {
       return SaveResources.save(op)
+    },
+    remove: function(op) {
+      return RemoveResources.remove(op)
     }
   }
 })

@@ -52,13 +52,25 @@ class Api::V1::OpsController < Api::V1::BaseController
     op = Op.new(create_params)
     op.user_id = @current_user
 
-    tag_ids.each do |t|
-      op.tags << Tag.find(t) unless Tag.find(t)
+    unless tag_ids.nil?
+      tag_ids = tag_ids.split(',') if tag_ids.is_a? String
+      tag_ids.each do |t|
+        op.tags << Tag.find(t)
+      end
     end
 
-    tags.each do |t|
-      tag = Tag.find_by_tag(t) || Tag.create(tag: t, user_id: @current_user)
-      op.tags << tag
+    unless tags.nil?
+      if tags.is_a? String
+        tags.split(',').each do |t|
+          tag = Tag.find_by_tag(t) || Tag.create(tag: t, user_id: @current_user)
+          op.tags << tag
+        end
+      else
+        tags.each do |t|
+          tag = Tag.find_by_tag(t) || Tag.create(tag: t, user_id: @current_user)
+          op.tags << tag
+        end
+      end
     end
 
     if op.save

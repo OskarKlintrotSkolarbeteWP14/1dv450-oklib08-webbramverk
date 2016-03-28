@@ -3,48 +3,18 @@
   <p>
     Logged in<span ng-if="admin.username"> as <strong>{{admin.username}}</strong></span>
   </p>
+  <p ng-if="admin.edit === admin.createNew">
+    <a data-ng-href="/admin?create">Create a new op</a>
+  </p>
   <div ng-if="admin.edit">
-    <h2>Update ops</h2>
-    <form novalidate>
-      <div class="form-group">
-        <label for="name">Name</label>
-        <input ng-model="admin.op.item" type="text" class="form-control" id="name">
-      </div>
-      <div class="form-group">
-        <label for="note">Note</label>
-        <input ng-model="admin.op.note" type="text" class="form-control" id="note">
-      </div>
-      <div class="form-group">
-        <label for="tags">Tags</label>
-        <input ng-model="admin.tags" type="text" class="form-control" id="tags">
-      </div>
-      <div class="form-group">
-        <label for="lng">Longitude</label>
-        <input ng-model="admin.position.lng" type="text" class="form-control" id="lng">
-      </div>
-      <div class="form-group">
-        <label for="lat">Latitude</label>
-        <input ng-model="admin.position.lat" type="text" class="form-control" id="lat">
-      </div>
-      <div class="form-group">
-        <label for="place">Place</label>
-        <input ng-model="admin.position.place" type="text" class="form-control" id="place">
-      </div>
-      <div class="form-group">
-        <label for="region">Region</label>
-        <input ng-model="admin.position.region" type="text" class="form-control" id="region">
-      </div>
-      <div class="form-group">
-        <label for="country">Country</label>
-        <input ng-model="admin.position.country" type="text" class="form-control" id="country">
-      </div>
-      <button ng-click="admin.update()" type="submit" class="btn btn-default">Update</button>
-      <input ng-click="admin.delete()" type="delete" value="Remove" class="btn btn-default" />
-      <input ng-click="admin.reset()" type="reset" value="Reset" class="btn btn-default" />
-      <input ng-click="admin.cancel()" type="cancel" value="Cancel" class="btn btn-default" />
-    </form>
+    <h2>Update op</h2>
+    <formforop model="admin" />
   </div>
-  <opstable ng-if="!admin.edit" ops="admin.tableParams" editable="true" />
+  <div ng-if="admin.createNew">
+    <h2>Create a new op</h2>
+    <formforop model="admin" />
+  </div>
+  <opstable ng-if="admin.edit === admin.createNew" ops="admin.tableParams" editable="true" remove="admin.remove"/>
 </div>
 <div ng-if="!admin.loggedIn">
   <p>

@@ -21,22 +21,23 @@ angular.module(C.appName)
     vm.loggedIn = LoggedIn.isLoggedIn()
     vm.username = LoggedIn.getUsername()
     vm.edit = $routeParams.edit || false
+    vm.createNew = $routeParams.create || false
 
     if (vm.edit) {
       getOneOp()
     }
 
-    vm.update = function() {
+    vm.update = function(createNew) {
       Resources.save({
         op: {
-          id: vm.op.id,
-          position_id: vm.op.position.id,
+          id: createNew ? null : vm.op.id,
+          position_id: createNew ? null : vm.op.position.id,
           item: vm.op.item,
           note: vm.op.note,
           tags: typeof vm.tags === String ? vm.tags.split(',') : vm.tags
         },
         position: {
-          id: vm.position.id,
+          id: createNew ? null : vm.position.id,
           lat: vm.position.lat,
           lng: vm.position.lng,
           place: vm.position.place,
@@ -49,8 +50,32 @@ angular.module(C.appName)
         })
     }
 
-    vm.delete = function() {
-      console.log('Delete!');
+    vm.create = function() {
+      var createNew = true
+      vm.update(createNew)
+    }
+
+    vm.remove = function(opID) {
+      console.log(opID)
+      if (opID) {
+        Resources
+          .remove({
+            opID: opID,
+            positionID: null
+          })
+          .then(function(data) {
+            $window.location = '/admin'
+          })
+      } else {
+        Resources
+          .remove({
+            opID: vm.op.id,
+            positionID: vm.position.id
+          })
+          .then(function(data) {
+            $window.location = '/admin'
+          })
+      }
     }
 
     vm.reset = function() {
