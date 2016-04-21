@@ -54,8 +54,10 @@ class Api::V1::OpsController < Api::V1::BaseController
 
     unless tag_ids.nil?
       tag_ids = tag_ids.split(',') if tag_ids.is_a? String
-      tag_ids.each do |t|
-        op.tags << Tag.find(t)
+      if tag_ids
+        tag_ids.each do |t|
+          op.tags << Tag.find(t)
+        end
       end
     end
 
