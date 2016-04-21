@@ -10,7 +10,8 @@ angular.module(C.appName).factory('OpsTable', function(
         return Resources.getNewOps(options).then(function(data) {
           return data
         })
-      }
+      },
+      counts: []
     })
   }
 })
