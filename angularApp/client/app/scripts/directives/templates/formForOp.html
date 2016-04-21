@@ -12,12 +12,12 @@
     <input required ng-model="model.tags" type="text" class="form-control" id="tags">
   </div>
   <div class="form-group">
-    <label for="lng">Longitude</label>
-    <input required ng-model="model.position.lng" type="text" pattern="[0-9]+([,\.][0-9]+)?" step="0.000001" class="form-control" id="lng">
+    <label for="lng">Longitude (must be between 180 and -180)</label>
+    <input required ng-model="model.position.lng" type="text" pattern="[0-9]+([\.][0-9]+)?" class="form-control" id="lng">
   </div>
   <div class="form-group">
-    <label for="lat">Latitude</label>
-    <input required ng-model="model.position.lat" type="text" pattern="[0-9]+([,\.][0-9]+)?" step="0.000001" class="form-control" id="lat">
+    <label for="lat">Latitude (must be between 90 and -90)</label>
+    <input required ng-model="model.position.lat" type="text" pattern="[0-9]+([\.][0-9]+)?" class="form-control" id="lat">
   </div>
   <div class="form-group">
     <label for="place">Place</label>
